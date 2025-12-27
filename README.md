@@ -4,7 +4,6 @@
 
 This project explores how Natural Language Inference (NLI) and claim decomposition can be integrated into a Retrieval-Augmented Generation (RAG) pipeline to reduce retrieval noise and improve answer grounding.
 
-Rather than directly targeting hallucination removal, the goal is to filter out irrelevant or contradictory passages retrieved by a dense retriever, leading to more focused and coherent answers.
 
 ## Motivation
 
