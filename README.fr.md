@@ -83,7 +83,6 @@ rag-nli-subclaim/
 ├── agents/              # Agent d'analyse
 ├── api/                 # Service FastAPI
 ├── scripts/             # Lanceurs d'expériences
-├── config/
 ├── data/
 └── README.md
 ```
@@ -99,7 +98,7 @@ pip install -r requirements.txt
 ### 2. Lancer les expériences
 
 ```bash
-python scripts/run_experiments.py
+python -m scripts.run_experiments
 ```
 
 Cela exécutera tous les pipelines sur un sous-ensemble de HotpotQA et affichera les métriques d'évaluation.
