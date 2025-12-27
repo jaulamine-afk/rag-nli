@@ -84,6 +84,7 @@ rag-nli-subclaim/
 ├── api/                 # Service FastAPI
 ├── scripts/             # Lanceurs d'expériences
 ├── data/
+├── docs/                
 └── README.md
 ```
 
