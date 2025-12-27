@@ -83,6 +83,7 @@ rag-nli/
 ├── api/                 # FastAPI service
 ├── scripts/             # Experiment runners
 ├── data/
+├── docs/  
 └── README.md
 ```
 
