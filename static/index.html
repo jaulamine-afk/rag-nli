@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG vs RAG+NLI Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+            color: #e2e8f0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            gap: 0;
+        }
+
+        .sidebar {
+            width: 320px;
+            background: rgba(26, 26, 46, 0.9);
+            border-right: 1px solid rgba(71, 85, 105, 0.3);
+            padding: 24px;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar h2 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .question-btn {
+            padding: 12px 14px;
+            background: rgba(71, 85, 105, 0.15);
+            border: 1px solid rgba(71, 85, 105, 0.25);
+            color: #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            line-height: 1.4;
+        }
+
+        .question-btn:hover {
+            background: rgba(71, 85, 105, 0.3);
+            border-color: rgba(71, 85, 105, 0.4);
+            transform: translateX(4px);
+        }
+
+        .question-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-color: #1e40af;
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.8), rgba(26, 26, 46, 0.6));
+        }
+
+        .chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #64748b;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 12px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        .question-display {
+            background: rgba(30, 58, 138, 0.2);
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question-display strong {
+            color: #60a5fa;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(71, 85, 105, 0.5);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .card.correct {
+            border-color: rgba(16, 185, 129, 0.5);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .card.incorrect {
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title.rag {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+
+        .card-title.nli {
+            color: #34d399;
+            border-bottom-color: #34d399;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(71, 85, 105, 0.15);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: #e2e8f0;
+            font-size: 14px;
+        }
+
+        .answer-section {
+            background: rgba(13, 13, 13, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 3px solid;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .card.rag .answer-section {
+            border-left-color: #60a5fa;
+        }
+
+        .card.nli .answer-section {
+            border-left-color: #34d399;
+        }
+
+        .answer-label {
+            font-size: 11px;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .analysis-box {
+            grid-column: 1 / -1;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(251, 146, 60, 0.3);
+            border-left: 4px solid #fbbf24;
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            margin-top: 10px;
+        }
+
+        .analysis-title {
+            font-weight: 700;
+            font-size: 13px;
+            color: #fbbf24;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .analysis-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .good-answer-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(71, 85, 105, 0.2);
+        }
+
+        .good-answer-label {
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .good-answer {
+            background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+            color: #86efac;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #60a5fa;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-left: 4px solid #ef4444;
+            color: #fca5a5;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(71, 85, 105, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(71, 85, 105, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Questions</h2>
+            <div class="questions-list" id="questionsList"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="chat-area" id="chatArea">
+                <div class="empty-state">
+                    <h3>📊 RAG vs RAG+NLI</h3>
+                    <p>Sélectionnez une question pour commencer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+
+        async function loadQuestions() {
+            try {
+                const response = await fetch('/api/questions');
+                const data = await response.json();
+                questions = data.questions;
+                populateQuestions();
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        function populateQuestions() {
+            const list = document.getElementById('questionsList');
+            questions.forEach(q => {
+                const btn = document.createElement('button');
+                btn.className = 'question-btn';
+                btn.textContent = q.question.substring(0, 50) + '...';
+                btn.title = q.question;
+                btn.onclick = () => handleQuestion(q, btn);
+                list.appendChild(btn);
+            });
+        }
+
+        async function handleQuestion(q, btn) {
+            document.querySelectorAll('.question-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const chatArea = document.getElementById('chatArea');
+            chatArea.innerHTML = '';
+
+            const qDisplay = document.createElement('div');
+            qDisplay.className = 'question-display';
+            qDisplay.innerHTML = `<strong>Question:</strong> ${escapeHtml(q.question)}<br><strong>Claim:</strong> ${escapeHtml(q.claim)}`;
+            chatArea.appendChild(qDisplay);
+
+            const loading = document.createElement('div');
+            loading.innerHTML = `Analyse en cours<span class="loading"></span>`;
+            chatArea.appendChild(loading);
+
+            try {
+                const res = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question_id: q.id })
+                });
+
+                const data = await res.json();
+                loading.remove();
+
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    chatArea.innerHTML += `<div class="error-message">Erreur: ${escapeHtml(data.error)}</div>`;
+                }
+            } catch (error) {
+                loading.remove();
+                chatArea.innerHTML += `<div class="error-message">Erreur: ${escapeHtml(error.message)}</div>`;
+            }
+        }
+
+        function displayResults(data) {
+            const chatArea = document.getElementById('chatArea');
+            
+            const ragCorrect = data.rag.answer === data.good_answer;
+            const nliCorrect = data.rag_nli.answer === data.good_answer;
+
+            const html = `
+                <div class="comparison">
+                    <div class="card rag ${ragCorrect ? 'correct' : 'incorrect'}">
+                        <div class="card-title rag">🔵 RAG Simple ${ragCorrect ? '✅' : '❌'}</div>
+                        <div class="stat-row">
+                            <span class="stat-label">Passages:</span>
+                            <span class="stat-value">${data.rag.passages_count}</span>
+                        </div>
+                        <div class="answer-section">
+                            <div class="answer-label">Réponse</div>
+                            ${escapeHtml(data.rag.answer)}
+                        </div>
+                    </div>
+
+                    <div class="card nli ${nliCorrect ? 'correct' : 'incorrect'}">
+                        <div class="card-title nli">🟢 RAG + NLI ${nliCorrect ? '✅' : '❌'}</div>
+                        <div class="stat-row">
+                            <span class="stat-label">Avant:</span>
+                            <span class="stat-value">${data.rag_nli.passages_before}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Après:</span>
+                            <span class="stat-value">${data.rag_nli.passages_after}</span>
+                        </div>
+                        <div class="answer-section">
+                            <div class="answer-label">Réponse</div>
+                            ${escapeHtml(data.rag_nli.answer)}
+                        </div>
+                    </div>
+
+                    <div class="analysis-box">
+                        <div class="analysis-title">✨ Analyse Comparative</div>
+                        <div class="analysis-text">${escapeHtml(data.analysis)}</div>
+                        <div class="good-answer-box">
+                            <span class="good-answer-label">Bonne réponse:</span>
+                            <span class="good-answer">${escapeHtml(data.good_answer)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const msg = document.createElement('div');
+            msg.innerHTML = html;
+            chatArea.appendChild(msg);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        loadQuestions();
+    </script>
+</body>
+</html>
