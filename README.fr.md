@@ -2,9 +2,9 @@
 
 [English](README.md)
 
-Ce projet explore comment l'inférence en langage naturel (NLI) et la décomposition d'affirmations peuvent être intégrées dans un pipeline de génération augmentée par récupération (RAG) pour réduire le bruit de récupération et améliorer l'ancrage des réponses.
+Ce projet explore comment l'inférence en langage naturel (NLI) et la décomposition d'affirmations peuvent être intégrées dans un pipeline de génération augmentée par récupération (RAG) pour réduire le bruit de récupération et améliorer les réponses.
 
-Plutôt que de cibler directement l'élimination des hallucinations, l'objectif est de filtrer les passages non pertinents ou contradictoires récupérés par un récupérateur dense, conduisant à des réponses plus ciblées et cohérentes.
+
 
 ## Motivation
 
