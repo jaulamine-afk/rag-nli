@@ -73,7 +73,7 @@ This component is intended as a pedagogical and interpretability tool, not as pa
 ## Project Structure
 
 ```
-rag-nli-subclaim/
+rag-nli/
 │
 ├── rag/                 # Retrieval & generation
 ├── nli/                 # NLI model and filtering logic
@@ -82,7 +82,6 @@ rag-nli-subclaim/
 ├── agents/              # Analysis agent
 ├── api/                 # FastAPI service
 ├── scripts/             # Experiment runners
-├── config/
 ├── data/
 └── README.md
 ```
