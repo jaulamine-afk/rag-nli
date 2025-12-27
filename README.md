@@ -97,7 +97,7 @@ pip install -r requirements.txt
 ### 2. Run experiments
 
 ```bash
-python scripts/run_experiments.py
+python -m scripts.run_experiments
 ```
 
 This will run all pipelines on a subset of HotpotQA and output evaluation metrics.
