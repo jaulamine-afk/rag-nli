@@ -83,8 +83,10 @@ rag-nli/
 ├── api/                 # FastAPI service
 ├── scripts/             # Experiment runners
 ├── data/
-├── docs/  
+├── docs/
+└── Dockerfile
 └── README.md
+
 ```
 
 ## Running the Project
@@ -119,6 +121,25 @@ You need to generate an API key here:
 👉 https://aistudio.google.com/app/apikey
 
 Paste your API key in the `code_api.txt` file at the root of the project.
+
+## Optional: Docker Deployment
+
+The project can also be containerized using Docker for easier deployment and reproducibility.
+
+A Dockerfile is provided to:
+
+- install dependencies,
+- expose the FastAPI service,
+- run the application in a reproducible environment.
+
+**Example commands:**
+
+```bash
+docker build -t rag-nli-app .
+docker run -p 8001:8001 rag-nli-app
+```
+
+This setup was tested locally and deployed on an AWS EC2 (Ubuntu) instance.
 
 ## Limitations
 
