@@ -48,7 +48,7 @@ The filtered passages are used as context for the language model to generate a f
 ┌─────────────────┐          ┌──────────────────┐
 │ Claim Generation│          │Retrieved Passages│
 │ (from question) │          │ [P1, P2, ..., Pk]│
-└────────┬────────┘          └─────────┬────────┘
+└────────┬────────┘          └──────────┬───────┘
          │                              │
          │         ┌────────────────────┘
          │         │
