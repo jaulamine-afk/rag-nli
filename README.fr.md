@@ -84,7 +84,8 @@ rag-nli-subclaim/
 ├── api/                 # Service FastAPI
 ├── scripts/             # Lanceurs d'expériences
 ├── data/
-├── docs/                
+├── docs/
+└── Dockerfile              
 └── README.md
 ```
 
@@ -120,6 +121,25 @@ Vous devez générer une clé API ici :
 👉 https://aistudio.google.com/app/apikey
 
 Collez votre clé API dans le fichier `code_api.txt` à la racine du projet.
+
+## Optionnel : Déploiement Docker
+
+Le projet peut également être conteneurisé avec Docker pour faciliter le déploiement et la reproductibilité.
+
+Un Dockerfile est fourni pour :
+
+- installer les dépendances,
+- exposer le service FastAPI,
+- exécuter l'application dans un environnement reproductible.
+
+**Commandes d'exemple :**
+
+```bash
+docker build -t rag-nli-app .
+docker run -p 8001:8001 rag-nli-app
+```
+
+Cette configuration a été testée localement et déployée sur une instance AWS EC2 (Ubuntu).
 
 ## Limitations
 
