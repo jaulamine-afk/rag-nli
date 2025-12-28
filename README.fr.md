@@ -33,13 +33,15 @@ Trois pipelines sont implémentés et comparés :
 ### RAG + NLI
 
 - Les passages récupérés sont filtrés à l'aide d'un modèle NLI
-- Seuls les passages qui impliquent l'affirmation sont conservés
+- Seuls les passages qui impliquent l'affirmation sont conservés 
+- Une explication détaillée de la méthode est disponible ici [RAG + NLI](.docs/rag_nli.md).
 
 ### RAG + NLI + Sous-Affirmations
 
 - Les affirmations complexes sont décomposées en sous-affirmations plus simples
 - Chaque sous-affirmation est validée indépendamment avec NLI
 - Les passages ne sont conservés que s'ils soutiennent au moins une sous-affirmation
+- Une explication détaillée de la méthode est disponible ici [RAG + NLI + Sub-Claims](.docs/rag_nli_subclaim.md).
 
 Cela permet un filtrage plus fin, en particulier pour les questions comparatives ou compositionnelles.
 
