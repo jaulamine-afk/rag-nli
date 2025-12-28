@@ -33,14 +33,14 @@ Three pipelines are implemented and compared:
 
 - Retrieved passages are filtered using an NLI model
 - Only passages that entail the claim are kept
-- A detailed explanation of the method is available here [RAG + NLI](.docs/rag_nli.md).
+- A detailed explanation of the method is available here [RAG + NLI](docs/rag_nli.md).
 
 ### RAG + NLI + Sub-Claims
 
 - Complex claims are decomposed into simpler sub-claims
 - Each sub-claim is validated independently with NLI
 - Passages are kept only if they support at least one sub-claim
-- A detailed explanation of the method is available here [RAG + NLI + Sub-Claims](.docs/rag_nli_subclaim.md).
+- A detailed explanation of the method is available here [RAG + NLI + Sub-Claims](docs/rag_nli_subclaim.md).
 
 This allows finer-grained filtering, especially for comparative or compositional questions.
 
