@@ -104,7 +104,7 @@ FAISS retrieves the following passages:
 4. "The capital of South Korea is Seoul."
 
 ### Step 2: Claim Generation
-**Claim:** "There is information about capital of japan"
+**Claim:** "There exists information about the capital of japan"
 
 ### Step 3: NLI Filtering
 | Passage | NLI Label | Kept? |
