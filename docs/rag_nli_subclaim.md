@@ -171,10 +171,10 @@ FAISS retrieves:
 
 The sub-claim decomposition strategy focuses on verifying the **independent existence of information** rather than asserting specific facts. This approach:
 
-✅ **Avoids presupposing answers:** We don't assume "Tokyo has 14 million people" — we only check if information about Tokyo's population exists  
-✅ **Increases recall:** Passages that contain relevant information are more likely to entail existence claims  
-✅ **Handles uncertainty better:** Works even when exact values vary across sources  
-✅ **Validates information availability:** Ensures each component needed to answer the question has supporting evidence
+ **Avoids presupposing answers:** We don't assume "Tokyo has 14 million people" — we only check if information about Tokyo's population exists  
+ **Increases recall:** Passages that contain relevant information are more likely to entail existence claims  
+ **Handles uncertainty better:** Works even when exact values vary across sources  
+ **Validates information availability:** Ensures each component needed to answer the question has supporting evidence
 
 For example:
 - ❌ Assertive claim: "Barack Obama was born in 1961" (too specific, may fail if year is slightly wrong in passage)
@@ -184,11 +184,11 @@ This technique is particularly effective for comparative and conjunctive questio
 
 ## Key Benefits
 
-✅ **Handles complex questions:** Comparative, disjunctive, and conjunctive queries  
-✅ **Finer-grained filtering:** Each sub-claim is validated independently  
-✅ **Improved precision:** Eliminates passages irrelevant to all sub-claims  
-✅ **Maintains coverage:** Union aggregation ensures relevant context for each aspect  
-✅ **Better answer grounding:** Generated answers are supported by specific evidence per sub-claim
+ **Handles complex questions:** Comparative, disjunctive, and conjunctive queries  
+ **Finer-grained filtering:** Each sub-claim is validated independently  
+ **Improved precision:** Eliminates passages irrelevant to all sub-claims  
+ **Maintains coverage:** Union aggregation ensures relevant context for each aspect  
+ **Better answer grounding:** Generated answers are supported by specific evidence per sub-claim
 
 ## When to Use This Method
 
