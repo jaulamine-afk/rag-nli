@@ -138,12 +138,12 @@ FAISS retrieves:
 **Detected:** Comparative structure → Decompose
 
 **Sub-Claims:**
-- SC1: "There is information about Tokyo's population."
-- SC2: "There is information about Paris's population."
+- SC1: "There exists information about Tokyo's population."
+- SC2: "There exists information about Paris's population."
 
 ### Step 3: NLI Filtering
 
-**For SC1: "There is information about Tokyo's population"**
+**For SC1: "There exists information about Tokyo's population"**
 
 | Passage | NLI Label | Kept? |
 |---------|-----------|-------|
@@ -152,7 +152,7 @@ FAISS retrieves:
 | Passage 3 | Neutral | ❌ No |
 | Passage 4 | Neutral | ❌ No |
 
-**For SC2: "There is information about Paris's population"**
+**For SC2: "There exists information about Paris's population"**
 
 | Passage | NLI Label | Kept? |
 |---------|-----------|-------|
@@ -178,7 +178,7 @@ The sub-claim decomposition strategy focuses on verifying the **independent exis
 
 For example:
 - ❌ Assertive claim: "Barack Obama was born in 1961" (too specific, may fail if year is slightly wrong in passage)
-- ✅ Existence claim: "There is information about Barack Obama's birth date" (more robust, captures any birth date mention)
+- ✅ Existence claim: "There exists information about Barack Obama's birth date" (more robust, captures any birth date mention)
 
 This technique is particularly effective for comparative and conjunctive questions where independent verification of each component is essential.
 
