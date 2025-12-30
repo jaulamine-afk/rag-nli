@@ -65,7 +65,7 @@ Results show consistent improvements over the RAG baseline, with:
 - improved answer grounding,
 - clearer gains for composition-heavy and comparative questions.
 
-📄 Detailed evaluation results (per model and Top-K) are available in:  
+Detailed evaluation results (per model and Top-K) are available in:  
 [`docs/evaluations.md`](docs/evaluations.md)
 
 
