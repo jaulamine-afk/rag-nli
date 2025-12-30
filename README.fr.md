@@ -66,7 +66,7 @@ Les résultats montrent des améliorations constantes par rapport au RAG de base
 - amélioration de l’ancrage factuel des réponses,
 - gains plus nets pour les questions compositionnelles ou comparatives.
 
-📄 Les résultats détaillés (par modèle et par Top-K) sont disponibles dans :  
+Les résultats détaillés (par modèle et par Top-K) sont disponibles dans :  
 [`docs/evaluations.md`](docs/evaluations.md)
 
 
