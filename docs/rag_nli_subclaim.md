@@ -34,8 +34,8 @@ If the claim is **not decomposable** (i.e., it's a simple factual question), the
 - **Question:** "Who is older, Barack Obama or Donald Trump?"
 - **Complex Claim:** "There exists information to compare the ages of Barack Obama and Donald Trump."
 - **Sub-Claims:**
-  1. "There is information about Barack Obama's birth date."
-  2. "There is information about Donald Trump's birth date."
+  1. "There exists information about Barack Obama's birth date."
+  2. "There exists information about Donald Trump's birth date."
 
 ### 3. NLI Filtering per Sub-Claim
 For each sub-claim:
