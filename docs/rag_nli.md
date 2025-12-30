@@ -13,7 +13,7 @@ A user question is sent to a dense retriever (FAISS-based), which returns the to
 
 ### 2. Claim Generation
 From the question, a **claim** (hypothesis) is derived. Rather than formulating a direct answer, the claim expresses the **existence of information** needed to answer the question.
-This claim generation technique is inspired by the work of Dai et al. (2024) in "Improve Dense Passage Retrieval with Entailment Tuning"[^1], where they propose reformulating queries into existence statements to better align with entailment-based retrieval.
+This claim generation technique is inspired by the work of Dai et al. (2024) in "Improve Dense Passage Retrieval with Entailment Tuning"[1], where they propose reformulating queries into existence statements to better align with entailment-based retrieval.
 
 **Example:**
 - **Question:** "Who is the president of France?"
