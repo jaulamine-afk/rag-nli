@@ -121,10 +121,10 @@ FAISS retrieves the following passages:
 
 ## Key Benefits
 
-✅ **Reduces retrieval noise:** Irrelevant or contradictory passages are filtered out  
-✅ **Improves answer grounding:** Only logically supporting evidence is used  
-✅ **Maintains efficiency:** NLI filtering is fast and adds minimal overhead  
-✅ **Preserves robustness:** Fallback mechanism ensures context is always available
+ **Reduces retrieval noise:** Irrelevant or contradictory passages are filtered out  
+ **Improves answer grounding:** Only logically supporting evidence is used  
+ **Maintains efficiency:** NLI filtering is fast and adds minimal overhead  
+ **Preserves robustness:** Fallback mechanism ensures context is always available
 
 ## Limitations
 
