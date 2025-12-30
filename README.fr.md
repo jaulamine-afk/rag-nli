@@ -55,11 +55,20 @@ Les expériences ont été menées sur HotpotQA (configuration avec distracteurs
 - F1
 - BERTScore (Précision / Rappel / F1)
 
+   **Résultats clés :**  
+Nous avons observé jusqu’à **+16 % d’amélioration en Exact Match** et **+10 % en F1** par rapport au RAG de base, selon le modèle et la configuration Top-K.
+
+Ces gains proviennent principalement de la **réduction du bruit de retrieval**, grâce au filtrage par inférence logique (NLI) et à la décomposition en sous-claims, plutôt que d’une simple augmentation de la capacité du générateur.
+
 Les résultats montrent des améliorations constantes par rapport au RAG de base, avec :
 
-- réduction des passages non pertinents,
-- amélioration de l'ancrage des réponses,
-- et gains plus nets pour les questions à forte composition.
+- réduction des passages non pertinents ou hors sujet,
+- amélioration de l’ancrage factuel des réponses,
+- gains plus nets pour les questions compositionnelles ou comparatives.
+
+📄 Les résultats détaillés (par modèle et par Top-K) sont disponibles dans :  
+[`docs/evaluations.md`](docs/evaluations.md)
+
 
 ## Agent d'Analyse (Démonstration)
 
@@ -162,3 +171,7 @@ Ces limitations sont discutées de manière transparente pour souligner le réal
 - Docker
 - AWS
 - Gemini (Google GenAI)
+
+## References
+
+[1] Lu Dai, Hao Liu, Hui Xiong. "Improve Dense Passage Retrieval with Entailment Tuning." The Hong Kong University of Science and Technology, 2024.

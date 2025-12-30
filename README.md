@@ -54,11 +54,20 @@ Experiments were conducted on HotpotQA (distractor setting).
 - F1
 - BERTScore (Precision / Recall / F1)
 
+  **Key results:**  
+We observed up to **+16% improvement in Exact Match** and **+10% in F1** compared to a standard RAG baseline, depending on the model and Top-K configuration.
+
+These improvements mainly stem from **retrieval noise reduction**, achieved through NLI-based entailment filtering and sub-claim decomposition, rather than from increasing generator capacity.
+
 Results show consistent improvements over the RAG baseline, with:
 
-- reduced irrelevant passages,
+- reduced irrelevant or off-topic passages,
 - improved answer grounding,
-- and clearer gains for composition-heavy questions.
+- clearer gains for composition-heavy and comparative questions.
+
+📄 Detailed evaluation results (per model and Top-K) are available in:  
+[`docs/evaluations.md`](docs/evaluations.md)
+
 
 ## Analysis Agent (Demonstration)
 
@@ -162,3 +171,7 @@ These limitations are discussed transparently to emphasize realism and reproduci
 - Docker
 - AWS
 - Gemini (Google GenAI)
+
+## References
+
+[1] Lu Dai, Hao Liu, Hui Xiong. "Improve Dense Passage Retrieval with Entailment Tuning." The Hong Kong University of Science and Technology, 2024.
