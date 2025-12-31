@@ -143,7 +143,7 @@ FAISS retrieves:
 
 ### Step 3: NLI Filtering
 
-**For SC1: "There exists information about Tokyo's size"**
+**For SC1: "There exists information about Tokyo's population"**
 
 | Passage | NLI Label | Kept? |
 |---------|-----------|-------|
@@ -152,7 +152,7 @@ FAISS retrieves:
 | Passage 3 | Neutral | ❌ No |
 | Passage 4 | Neutral | ❌ No |
 
-**For SC2: "There exists information about Paris's size"**
+**For SC2: "There exists information about Paris's population"**
 
 | Passage | NLI Label | Kept? |
 |---------|-----------|-------|
