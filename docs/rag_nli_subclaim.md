@@ -133,17 +133,17 @@ FAISS retrieves:
 4. "The Eiffel Tower is located in Paris."
 
 ### Step 2: Claim Decomposition
-**Original Claim:** "There exists information to compare the sizes of Tokyo and Paris."
+**Original Claim:** "One of Tokyo or Paris is larger than the other."
 
 **Detected:** Comparative structure → Decompose
 
 **Sub-Claims:**
-- SC1: "There exists information about Tokyo's population."
-- SC2: "There exists information about Paris's population."
+- SC1: "There exists information about Tokyo's size."
+- SC2: "There exists information about Paris's size."
 
 ### Step 3: NLI Filtering
 
-**For SC1: "There exists information about Tokyo's population"**
+**For SC1: "There exists information about Tokyo's size"**
 
 | Passage | NLI Label | Kept? |
 |---------|-----------|-------|
@@ -152,7 +152,7 @@ FAISS retrieves:
 | Passage 3 | Neutral | ❌ No |
 | Passage 4 | Neutral | ❌ No |
 
-**For SC2: "There exists information about Paris's population"**
+**For SC2: "There exists information about Paris's size"**
 
 | Passage | NLI Label | Kept? |
 |---------|-----------|-------|
