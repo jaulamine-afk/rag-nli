@@ -138,8 +138,8 @@ FAISS retrieves:
 **Detected:** Comparative structure → Decompose
 
 **Sub-Claims:**
-- SC1: "There exists information about Tokyo's size."
-- SC2: "There exists information about Paris's size."
+- SC1: "There exists information about Tokyo's population."
+- SC2: "There exists information about Paris's population."
 
 ### Step 3: NLI Filtering
 
