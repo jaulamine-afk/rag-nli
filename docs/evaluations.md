@@ -218,10 +218,10 @@ Despite limitations (small sample size, rule-based decomposition), results show 
 ## Future Work
 
 ### 1. Generalized Sub-Claim Decomposition
-Current decomposition relies on rule-based heuristics. Future directions:
-- **LLM-based decomposition** to handle diverse question types automatically
-- **NLP library approaches** (spaCy, dependency parsing) for broader linguistic coverage
-- Would enable the method to work on more complex questions
+To overcome the heuristic limitations and make this pipeline robust for production environments, future improvements should focus on:
+
+1.  **Fine-tuned LLM for Decomposition:** Replacing the hard-coded function with a Small Language Model (SLM) or a Fine-Tuned LLM trained specifically to break down complex natural language queries into atomic, logical sub-claims automatically.
+2.  **Generalizable Parsing:** Developing a semantic parsing module capable of handling nested clauses and implicit comparisons without relying on keyword matching.
 
 ### 2. Large-Scale Statistical Validation
 - Evaluate on **1,000+ questions** with statistical significance testing (t-tests, bootstrap)
