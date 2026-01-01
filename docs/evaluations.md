@@ -2,23 +2,34 @@
 
 This document presents the comparative evaluation of the three pipeline methods across different models and Top-K configurations.
 
-## Experimental Setup
+# Experimental Setup
 
-**Dataset:** HotpotQA (distractor setting)  
-**Sample Size:** 100 questions  
-**Retriever:** SentenceTransformer ('all-MiniLM-L6-v2') with FAISS indexing  
-**NLI Model:** facebook/bart-large-mnli  
-**Generators Tested:**
-- FLAN-T5-Small
-- FLAN-T5-Base
-- UnifiedQA-T5-Small
+## Dataset & Scope
+* **Dataset:** HotpotQA (distractor setting)
+* **Sample Size:** 100 questions
+* **Retrieval Corpus:** Index built from the contexts of 300 questions, **including** the contexts for the 100 evaluation questions. Using a corpus larger than the test set creates a realistic retrieval scenario with a naturally expanded search space.
 
-### Top-K Configurations Tested
-- **Top-2:** Retrieve 2 most similar passages
-- **Top-3:** Retrieve 3 most similar passages
-- **Top-4:** Retrieve 4 most similar passages
+### Rationale for Sample Size
+Evaluation was limited to 100 questions due to:
+1.  **Compute Constraints:** NLI inference is CPU-intensive; scaling without GPUs was prohibitive.
+2.  **Testing Volume:** Combinatorial testing (Generators × Top-K) exponentially increased runtime.
+3.  **Heuristic Scope:** Decomposition currently relies on dataset-specific rules, not yet a generalizable LLM model.
 
-*Note: Configurations above Top-4 showed significantly degraded performance and were excluded from analysis.*
+## System Components
+* **Retriever:** SentenceTransformer (`all-MiniLM-L6-v2`) with FAISS indexing for dense retrieval.
+* **NLI Model:** `facebook/bart-large-mnli` (Used for zero-shot entailment classification).
+* **Generators Tested:**
+    * `google/flan-t5-small`
+    * `google/flan-t5-base`
+    * `allenai/unifiedqa-t5-small`
+
+## Configurations
+To analyze the impact of context window size and noise, we tested the following retrieval settings:
+* **Top-2:** Retrieve 2 most similar passages
+* **Top-3:** Retrieve 3 most similar passages
+* **Top-4:** Retrieve 4 most similar passages
+
+> **Note:** Preliminary tests with *Top-K > 4* resulted in significantly degraded performance due to the introduction of excessive noise for the smaller generator models (T5-Small/Base), and were therefore excluded from the final analysis.
 
 ---
 
