@@ -12,8 +12,38 @@ The pipeline operates in three main stages:
 A user question is sent to a dense retriever (FAISS-based), which returns the top-k most semantically similar passages from the knowledge base.
 
 ### 2. Claim Generation
-From the question, a **claim** (hypothesis) is derived. Rather than formulating a direct answer, the claim expresses the **existence of information** needed to answer the question.
-This claim generation technique is inspired by the work of Dai et al. (2024) in "Improve Dense Passage Retrieval with Entailment Tuning"[1], where they propose reformulating queries into existence statements to better align with entailment-based retrieval.
+
+From the question, a **claim** (hypothesis) is derived. Rather than formulating a direct answer, the claim expresses the **existence of information** needed to answer the question. This claim generation technique is inspired by the work of Dai et al. (2024) in *"Improve Dense Passage Retrieval with Entailment Tuning"* [1].
+
+To standardize the input for the NLI model, we prompted an LLM to reformulate natural language questions. An analysis of the generated claims reveals three distinct recurring schemas designed to maximize entailment detection:
+
+#### 1. Existential Declarations ("There exists...")
+This is the most common pattern, used to transform specific "Who/What/When/Where" questions into declarative statements asserting that the information can be found.
+* **Pattern:** `There exists [target attribute]...` or `There exists a [type of entity] who...`
+* **Examples:**
+    * *"There exists a birth year for the creator of the manga..."*
+    * *"There exists a capacity number for the arena where..."*
+    * *"There exists a reason why..."*
+* **Purpose:** It forces the NLI model to confirm if the passage *contains* the answer, rather than checking if the passage *matches* a specific value.
+
+#### 2. Comparative & Disjunctive Structures ("One of X or Y...")
+This pattern is used specifically for questions requiring a choice or comparison between two entities.
+* **Pattern:** `One of [Entity A] or [Entity B] is [comparative predicate].`
+* **Examples:**
+    * *"One of Tokyo or Paris is larger than the other."*
+    * *"One of Keith Bostic or Jerry Glanville is younger."*
+* **Purpose:** It creates a logical disjunction where finding information about *either* entity allows the pipeline to proceed to decomposition.
+
+#### 3. Conjunctive & Shared Attribute Assertions ("X and Y are...")
+This pattern handles multi-hop questions where the relationship between two entities must be verified.
+* **Pattern:** `[Entity A] and [Entity B] share [attribute]` or `[Entity A] and [Entity B] are both [category].`
+* **Examples:**
+    * *"Scott Derrickson and Ed Wood share the same nationality."*
+    * *"Ferocactus and Silene are both types of plant."*
+    * *"The Laleli Mosque and Esma Sultan Mansion are located in the same neighborhood."*
+* **Purpose:** It sets up a compound fact that the system will subsequently decompose to verify each entity independently.
+
+By standardizing questions into these three logical forms, the pipeline ensures that the NLI model always processes well-formed hypotheses, regardless of the original question's complexity.
 
 **Example:**
 - **Question:** "Who is the president of France?"
