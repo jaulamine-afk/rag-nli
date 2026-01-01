@@ -7,7 +7,7 @@ This document presents the comparative evaluation of the three pipeline methods 
 ## Dataset & Scope
 * **Dataset:** HotpotQA (distractor setting)
 * **Sample Size:** 100 questions
-* **Retrieval Corpus:** Closed-pool index built from context sentences of 300 questions (including the 100 evaluation targets).
+* **Retrieval Corpus:** Index built from the contexts of 300 questions, **including** the contexts for the 100 evaluation questions. Using a corpus larger than the test set creates a realistic retrieval scenario with a naturally expanded search space.
 
 ### Rationale for Sample Size
 Evaluation was limited to 100 questions due to:
