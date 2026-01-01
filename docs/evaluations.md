@@ -17,7 +17,7 @@ Evaluation was limited to 100 questions due to:
 
 ## System Components
 * **Retriever:** SentenceTransformer (`all-MiniLM-L6-v2`) with FAISS indexing for dense retrieval.
-* **NLI Model:** `facebook/bart-large-mnli` (Used for zero-shot entailment classification).
+* **NLI Model:** `facebook/bart-large-mnli`.
 * **Generators Tested:**
     * `google/flan-t5-small`
     * `google/flan-t5-base`
@@ -29,7 +29,7 @@ To analyze the impact of context window size and noise, we tested the following 
 * **Top-3:** Retrieve 3 most similar passages
 * **Top-4:** Retrieve 4 most similar passages
 
-> **Note:** Preliminary tests with *Top-K > 4* resulted in significantly degraded performance due to the introduction of excessive noise for the smaller generator models (T5-Small/Base), and were therefore excluded from the final analysis.
+> **Note:** Configurations above Top-4 showed significantly degraded performance and were excluded from analysis.
 
 ---
 
