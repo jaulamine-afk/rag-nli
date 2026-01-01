@@ -123,64 +123,63 @@ Just like RAG + NLI, if **no passages** are found with entailment for any sub-cl
 ## Example Walkthrough
 
 ### Question
-*"Which is larger, Tokyo or Paris?"*
+*"Which of Henry Roth or Robert Erskine Childers was from England?"*
 
 ### Step 1: Retrieval
 FAISS retrieves:
-1. "Tokyo has a population of approximately 14 million people."
-2. "Paris is the capital of France with around 2.1 million inhabitants."
-3. "Tokyo is the capital of Japan."
-4. "The Eiffel Tower is located in Paris."
+1. "Henry Roth was an American novelist and short story writer, born in Tysmenitz, Austria-Hungary."
+2. "Robert Erskine Childers was born in London, England, and was a cousin of the Irish politician Hugh Childers."
+3. "Call It Sleep is the most famous novel written by Henry Roth."
+4. "London is the capital and largest city of England and the United Kingdom."
 
 ### Step 2: Claim Decomposition
-**Original Claim:** "One of Tokyo or Paris is larger than the other."
-
-**Detected:** Comparative structure → Decompose
+**Original Claim:** "One of Henry Roth or Robert Erskine Childers was from England."  
+**Detected:** Disjunctive structure (OR) → Decompose  
 
 **Sub-Claims:**
-- SC1: "There exists information about Tokyo's population."
-- SC2: "There exists information about Paris's population."
+- **SC1:** "There exists information about where Henry Roth is from."
+- **SC2:** "There exists information about where Robert Erskine Childers is from."
 
 ### Step 3: NLI Filtering
 
-**For SC1: "There exists information about Tokyo's population"**
+**For SC1: "There exists information about where Henry Roth is from"**
 
 | Passage | NLI Label | Kept? |
-|---------|-----------|-------|
-| Passage 1 | **Entailment** | ✅ Yes |
-| Passage 2 | Neutral | ❌ No |
-| Passage 3 | Neutral | ❌ No |
-| Passage 4 | Neutral | ❌ No |
+| :--- | :--- | :--- |
+| **Passage 1** (Roth's origin) | **Entailment** | ✅ Yes |
+| **Passage 2** (Childers' origin) | Neutral | ❌ No |
+| **Passage 3** (Roth's book) | Neutral | ❌ No |
+| **Passage 4** (City info) | Neutral | ❌ No |
 
-**For SC2: "There exists information about Paris's population"**
+**For SC2: "There exists information about where Robert Erskine Childers is from"**
 
 | Passage | NLI Label | Kept? |
-|---------|-----------|-------|
-| Passage 1 | Neutral | ❌ No |
-| Passage 2 | **Entailment** | ✅ Yes |
-| Passage 3 | Neutral | ❌ No |
-| Passage 4 | Neutral | ❌ No |
+| :--- | :--- | :--- |
+| **Passage 1** (Roth's origin) | Neutral | ❌ No |
+| **Passage 2** (Childers' origin) | **Entailment** | ✅ Yes |
+| **Passage 3** (Roth's book) | Neutral | ❌ No |
+| **Passage 4** (City info) | Neutral | ❌ No |
 
 ### Step 4: Aggregation
-**Filtered Passages:** Passage 1 + Passage 2 (union of passages supporting any sub-claim)
+**Filtered Passages:** Passage 1 + Passage 2 (union of all passages supporting at least one sub-claim).
 
 ### Step 5: Generation
-**Final Answer:** "Tokyo is larger than Paris. Tokyo has a population of approximately 14 million, while Paris has around 2.1 million inhabitants."
+**Final Answer:** "Robert Erskine Childers was from England (born in London), whereas Henry Roth was born in Austria-Hungary (Tysmenitz) and was an American novelist."
+
+---
 
 ## Key Insight: Existence-Based Sub-Claims
 
 The sub-claim decomposition strategy focuses on verifying the **independent existence of information** rather than asserting specific facts. This approach:
 
- **Avoids presupposing answers:** We don't assume "Tokyo has 14 million people" — we only check if information about Tokyo's population exists  
- **Increases recall:** Passages that contain relevant information are more likely to entail existence claims  
- **Handles uncertainty better:** Works even when exact values vary across sources  
- **Validates information availability:** Ensures each component needed to answer the question has supporting evidence
+- **Avoids presupposing answers:** We don't assume "Henry Roth was from England" — we only check if information about his origin exists.
+- **Increases recall:** Passages that contain relevant information (even if they say he is from somewhere else) are kept, allowing the LLM to make the correct comparison.
+- **Handles uncertainty better:** Works even when exact locations vary across different retrieved sources.
+- **Validates information availability:** Ensures each entity needed for the final comparison has supporting evidence.
 
 For example:
-- ❌ Assertive claim: "Barack Obama was born in 1961" (too specific, may fail if year is slightly wrong in passage)
-- ✅ Existence claim: "There exists information about Barack Obama's birth date" (more robust, captures any birth date mention)
-
-This technique is particularly effective for comparative and conjunctive questions where independent verification of each component is essential.
+- ❌ **Assertive claim:** "Barack Obama was born in 1961" (too specific, may fail if the passage only mentions his birthplace but not the year).
+- ✅ **Existence claim:** "There exists information about Barack Obama's birth date" (more robust, captures any mention of his birth details).
 
 ## Key Benefits
 
