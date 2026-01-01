@@ -172,6 +172,6 @@ Ces limitations sont discutées de manière transparente pour souligner le réal
 - AWS
 - Gemini (Google GenAI)
 
-## References
+## Références
 
 [1] Lu Dai, Hao Liu, Hui Xiong. "Improve Dense Passage Retrieval with Entailment Tuning." The Hong Kong University of Science and Technology, 2024.
