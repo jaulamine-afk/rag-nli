@@ -15,7 +15,7 @@ A user question is sent to a dense retriever (FAISS-based), which returns the to
 
 From the question, a **claim** (hypothesis) is derived. Rather than formulating a direct answer, the claim expresses the **existence of information** needed to answer the question. This claim generation technique is inspired by the work of Dai et al. (2024) in *"Improve Dense Passage Retrieval with Entailment Tuning"* [1].
 
-To standardize the input for the NLI model, we prompted an LLM to reformulate natural language questions. An analysis of the generated claims reveals three distinct recurring schemas designed to maximize entailment detection:
+To standardize the input for the NLI model, we prompted Chatgpt to reformulate natural language questions. An analysis of the generated claims reveals three distinct recurring schemas designed to maximize entailment detection:
 
 #### 1. Existential Declarations ("There exists...")
 This is the most common pattern, used to transform specific "Who/What/When/Where" questions into declarative statements asserting that the information can be found.
