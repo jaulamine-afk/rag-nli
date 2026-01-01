@@ -202,10 +202,11 @@ For simple, single-entity factual questions, the standard **RAG + NLI** method i
 
 ## Limitations
 
-- **Decomposition quality:** Rule-based decomposition may fail for highly complex or ambiguous claims
-- **Increased computational cost:** NLI must run multiple times (once per sub-claim)
-- **Not all claims are decomposable:** Some complex questions cannot be easily split
-- **Dependency handling:** Sub-claims are treated independently, which may miss interdependencies
+- **Heuristic-Based Decomposition (Not Generalizable):** The current decomposition function in this repository is **hard-coded and adapted specifically to the dataset's structure** (using rule-based heuristics for specific operators like "AND", "OR", "vs"). It is **not zero-shot generalizable** to unseen, linguistically complex, or ambiguous phrasings outside the tested scope.
+- **Computational Cost:** The NLI model must run multiple times (once per sub-claim per passage), which increases inference latency compared to a standard pipeline.
+- **Independent Verification:** Sub-claims are treated independently, which might miss subtle interdependencies between facts.
+
+> 💡 **Note:** Detailed solutions to these limitations are discussed in the [Future Work section of the evaluations.md page](evaluations.md).
 
 ## Comparison with RAG + NLI
 
