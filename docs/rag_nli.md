@@ -45,10 +45,6 @@ This pattern handles multi-hop questions where the relationship between two enti
 
 By standardizing questions into these three logical forms, the pipeline ensures that the NLI model always processes well-formed hypotheses, regardless of the original question's complexity.
 
-**Example:**
-- **Question:** "Who is the president of France?"
-- **Derived Claim:** "There exists information about who is the president of France."
-
 ### 3. NLI Filtering
 The NLI model evaluates each retrieved passage against the claim:
 - **Premises:** Retrieved passages from FAISS
