@@ -70,7 +70,7 @@ rag_nli_pipeline = RAG_NLI_Subclaim(retriever, generator, nli_model, top_k=2)
 
 analyzer = AgentAnalysis()
 
-print("✅ Initialization completed")
+print("Initialization completed")
 
 class QuestionRequest(BaseModel):
     question_id: int
