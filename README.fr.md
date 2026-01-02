@@ -56,7 +56,7 @@ Les expériences ont été menées sur HotpotQA (configuration avec distracteurs
 - BERTScore (Précision / Rappel / F1)
 
    **Résultats clés :**  
-Nous avons observé jusqu’à **+16 % d’amélioration en Exact Match** et **+10 % en F1** par rapport au RAG de base, selon le modèle et la configuration Top-K.
+On observe jusqu’à **+16 % d’amélioration en Exact Match** et **+10 % en F1** par rapport au RAG de base, selon le modèle et la configuration Top-K.
 
 Ces gains proviennent principalement de la **réduction du bruit de retrieval**, grâce au filtrage par inférence logique (NLI) et à la décomposition en sous-claims, plutôt que d’une simple augmentation de la capacité du générateur.
 
