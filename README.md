@@ -2,7 +2,7 @@
 
 [Français](README.fr.md)
 
-This project explores how Natural Language Inference (NLI) and claim decomposition can be integrated into a Retrieval-Augmented Generation (RAG) pipeline to reduce retrieval noise and improve answer grounding.
+My project explores how Natural Language Inference (NLI) and claim decomposition can be integrated into a Retrieval-Augmented Generation (RAG) pipeline to reduce retrieval noise and improve answer grounding.
 
 
 ## Motivation
