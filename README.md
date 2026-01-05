@@ -56,7 +56,7 @@ This allows finer-grained filtering, especially for comparative or compositional
 The diagram below illustrates the main pipeline (**RAG + NLI + Sub-Claims**). It details how complex queries are decomposed and how the NLI model acts as a semantic gatekeeper to filter out noise before generation.
 
 <p align="center">
-  <img src="docs/images/Graph_rag.png" alt="RAG with NLI Architecture" width="600">
+  <img src="docs/images/Graph_rag_nli_sub.png" alt="RAG with NLI Architecture" width="600">
   <br>
   <em>(Figure: Workflow of Sub-Claim Decomposition and NLI Entailment Filtering)</em>
 </p>
