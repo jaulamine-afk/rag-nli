@@ -91,12 +91,17 @@ Detailed evaluation results (per model and Top-K) are available in:
 In addition to quantitative evaluation, the project includes an analysis agent powered by Gemini.
 
 This agent:
+- compares answers from the Baseline RAG vs. RAG + NLI + Sub-Claims,
+- inspects retrieved passages to detect hallucinations,
+- **explains exactly why a document was rejected** (e.g., distinguishing between semantically similar entities like Rihanna vs. Usher).
 
-- compares answers from RAG vs RAG + NLI Sub-Claims,
-- inspects retrieved passages before and after filtering,
-- explains why one pipeline produces a more reliable answer.
+<p align="center">
+  <img src="docs/images/Agent_demo.png" alt="Analysis Agent Demo" width="700">
+  <br>
+  <em>(Figure: The agent explaining why a "distractor" passage about Rihanna was rejected, allowing the system to correctly identify Usher)</em>
+</p>
 
-This component is intended as a pedagogical and interpretability tool, not as part of the core evaluation loop.
+*This component is intended as a pedagogical and interpretability tool, not as part of the core evaluation loop.*
 
 
 ## Project Structure
