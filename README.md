@@ -62,7 +62,7 @@ Experiments were conducted on HotpotQA (distractor setting).
 - BERTScore (Precision / Recall / F1)
 
   **Key results:**  
-We observed up to **+16% improvement in Exact Match** and **+10% in F1** compared to a standard RAG baseline, depending on the model and Top-K configuration.
+With our most advanced pipeline (**RAG + NLI + Sub-Claims**) we observed up to **+16% improvement in Exact Match** and **+10% in F1** compared to a standard RAG baseline, depending on the model and Top-K configuration.
 
 These improvements mainly stem from **retrieval noise reduction**, achieved through NLI-based entailment filtering and sub-claim decomposition, rather than from increasing generator capacity.
 
