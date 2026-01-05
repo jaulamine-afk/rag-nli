@@ -87,13 +87,21 @@ Les résultats détaillés (par modèle et par Top-K) sont disponibles dans :
 
 ## Agent d'Analyse (Démonstration)
 
-En plus de l'évaluation quantitative, le projet inclut un agent d'analyse propulsé par Gemini.
+Le projet inclut un agent d'analyse propulsé par Gemini qui inspecte les décisions du pipeline.
 
-Cet agent :
+**1. Comparaison des Résultats :**
+L'agent affiche d'abord l'affirmation générée et compare les réponses. La baseline échoue (hallucination) tandis que notre système réussit.
 
-- compare les réponses de RAG vs RAG + NLI Sous-Affirmations,
-- inspecte les passages récupérés avant et après filtrage,
-- explique pourquoi un pipeline produit une réponse plus fiable.
+<p align="center">
+  <img src="docs/images/Agent_compare.png" alt="Comparaison RAG vs NLI" width="600">
+</p>
+
+**2. Raisonnement & Filtrage :**
+Ensuite, il explique *pourquoi* la correction a eu lieu : le module NLI a rejeté le passage "piège" sur Rihanna car il ne validait pas l'affirmation concernant l'album "Confessions".
+
+<p align="center">
+  <img src="docs/images/Agent_analysis.png" alt="Analyse Logique Agent" width="600">
+</p>
 
 Ce composant est conçu comme un outil pédagogique et d'interprétabilité, et non comme partie intégrante de la boucle d'évaluation principale.
 
