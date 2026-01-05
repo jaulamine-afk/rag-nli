@@ -96,7 +96,7 @@ This agent:
 - **explains exactly why a document was rejected** (e.g., distinguishing between semantically similar entities like Rihanna vs. Usher).
 
 <p align="center">
-  <img src="docs/images/Agent_demo.png" alt="Analysis Agent Demo" width="700">
+  <img src="docs/images/Agent_demo.png" alt="Analysis Agent Demo" width="600">
   <br>
   <em>(Figure: The agent explaining why a "distractor" passage about Rihanna was rejected, allowing the system to correctly identify Usher)</em>
 </p>
