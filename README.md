@@ -51,6 +51,13 @@ Three pipelines are implemented and compared:
 
 This allows finer-grained filtering, especially for comparative or compositional questions.
 
+## System Architecture
+
+The diagram below illustrates the main pipeline (**RAG + NLI + Sub-Claims**). It details how complex queries are decomposed and how the NLI model acts as a semantic gatekeeper to filter out noise before generation.
+
+![RAG with NLI Architecture](docs/images/Graph_rag_nli_sub.png)
+*(Figure: Workflow of the Sub-Claim Decomposition and NLI Entailment Filtering)*
+
 ## Evaluation
 
 Experiments were conducted on HotpotQA (distractor setting).
