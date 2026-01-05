@@ -147,7 +147,7 @@ python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
 Some components (analysis agent) use Gemini 2.5 Flash.
 
 1. Generate an API key here:
-   https://aistudio.google.com/app/apikey
+   [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
 
 2. Create a file named `.env` at the root of the project.
 
