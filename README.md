@@ -91,7 +91,6 @@ Some components (analysis agent) use Gemini 2.5 Flash.
 
 This component is intended as a pedagogical and interpretability tool, not as part of the core evaluation loop.
 
-[!WARNING] ATTENTION: NEVER share your API key!
 
 ## Project Structure
 
