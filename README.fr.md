@@ -152,7 +152,6 @@ Certains composants (notamment l'agent d'analyse) utilisent Gemini 2.5 Flash.
    ```env
    GOOGLE_API_KEY=votre_cle_ici
 
-Ce composant est conçu comme un outil pédagogique et d'interprétabilité, et ne fait pas partie du cycle d'évaluation principal.
 
 ## Optionnel : Déploiement Docker
 
