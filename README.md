@@ -76,15 +76,18 @@ Detailed evaluation results (per model and Top-K) are available in:
 [`docs/evaluations.md`](docs/evaluations.md)
 
 
-## Analysis Agent (Demonstration)
+## API Key Configuration (Gemini)
 
-In addition to quantitative evaluation, the project includes an analysis agent powered by Gemini.
+Some components (analysis agent) use Gemini 2.5 Flash.
 
-This agent:
+1. Generate an API key here:
+   https://aistudio.google.com/app/apikey
 
-- compares answers from RAG vs RAG + NLI Sub-Claims,
-- inspects retrieved passages before and after filtering,
-- explains why one pipeline produces a more reliable answer.
+2. Create a file named `.env` at the root of the project.
+
+3. Add your key inside the `.env` file:
+   ```env
+   GOOGLE_API_KEY=your_api_key_here
 
 This component is intended as a pedagogical and interpretability tool, not as part of the core evaluation loop.
 
