@@ -4,6 +4,11 @@
 
 My project explores how Natural Language Inference (NLI) and claim decomposition can be integrated into a Retrieval-Augmented Generation (RAG) pipeline to reduce retrieval noise and improve answer grounding.
 
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)](https://www.docker.com/)
+[![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900)](https://aws.amazon.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 
 ## Motivation
 
