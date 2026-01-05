@@ -131,12 +131,21 @@ python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
 
 ## Configuration de la Clé API (Gemini)
 
-Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
+```markdown
+## Configuration de la Clé API (Gemini)
 
-Vous devez générer une clé API ici :  
- https://aistudio.google.com/app/apikey
+Certains composants (notamment l'agent d'analyse) utilisent Gemini 2.5 Flash.
 
-Collez votre clé API dans le fichier `code_api.txt` à la racine du projet.
+1. Générez une clé API ici :
+   https://aistudio.google.com/app/apikey
+
+2. Créez un fichier nommé `.env` à la racine du projet.
+
+3. Ajoutez votre clé dans le fichier `.env` :
+   ```env
+   GOOGLE_API_KEY=votre_cle_ici
+
+Ce composant est conçu comme un outil pédagogique et d'interprétabilité, et ne fait pas partie du cycle d'évaluation principal.
 
 ## Optionnel : Déploiement Docker
 
