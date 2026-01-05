@@ -161,7 +161,8 @@ Some components (analysis agent) use Gemini 2.5 Flash.
 
 3. Add your key inside the `.env` file:
    ```env
-   GOOGLE_API_KEY=your_api_key_here ```
+   GOOGLE_API_KEY=your_api_key_here
+   
 
 
 ## Optional: Docker Deployment
