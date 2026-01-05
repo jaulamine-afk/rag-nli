@@ -144,15 +144,14 @@ python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
 Certains composants (notamment l'agent d'analyse) utilisent Gemini 2.5 Flash.
 
 1. Générez une clé API ici :
-   https://aistudio.google.com/app/apikey
+   [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
 
 2. Créez un fichier nommé `.env` à la racine du projet.
 
 3. Ajoutez votre clé dans le fichier `.env` :
    ```env
    GOOGLE_API_KEY=votre_cle_ici
-
-
+   
 ## Optionnel : Déploiement Docker
 
 Le projet peut également être conteneurisé avec Docker pour faciliter le déploiement et la reproductibilité.
