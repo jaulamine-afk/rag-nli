@@ -88,17 +88,20 @@ Detailed evaluation results (per model and Top-K) are available in:
 
 ## Analysis Agent (Demonstration)
 
-In addition to quantitative evaluation, the project includes an analysis agent powered by Gemini.
+The project includes an analysis agent powered by Gemini that inspects the pipeline's decisions.
 
-This agent:
-- compares answers from the Baseline RAG vs. RAG + NLI + Sub-Claims,
-- inspects retrieved passages to detect hallucinations,
-- **explains exactly why a document was rejected** (e.g., distinguishing between semantically similar entities like Rihanna vs. Usher).
+**1. Comparison of Results:**
+The agent first shows the generated claim and compares the answers. The baseline fails (hallucination) while our system succeeds.
 
 <p align="center">
-  <img src="docs/images/Agent_demo.png" alt="Analysis Agent Demo" width="600">
-  <br>
-  <em>(Figure: The agent explaining why a "distractor" passage about Rihanna was rejected, allowing the system to correctly identify Usher)</em>
+  <img src="docs/images/Agent_compare.png" alt="Comparison RAG vs NLI" width="600">
+</p>
+
+**2. Reasoning & Filtering:**
+Then, it explains *why* the correction happened: the NLI module successfully filtered out the "distractor" passage about Rihanna because it didn't entail the claim about the album "Confessions".
+
+<p align="center">
+  <img src="docs/images/Agent_analysis.png" alt="Agent Logic Analysis" width="600">
 </p>
 
 *This component is intended as a pedagogical and interpretability tool, not as part of the core evaluation loop.*
