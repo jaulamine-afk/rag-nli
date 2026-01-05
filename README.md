@@ -86,18 +86,15 @@ Detailed evaluation results (per model and Top-K) are available in:
 [`docs/evaluations.md`](docs/evaluations.md)
 
 
-## API Key Configuration (Gemini)
+## Analysis Agent (Demonstration)
 
-Some components (analysis agent) use Gemini 2.5 Flash.
+In addition to quantitative evaluation, the project includes an analysis agent powered by Gemini.
 
-1. Generate an API key here:
-   https://aistudio.google.com/app/apikey
+This agent:
 
-2. Create a file named `.env` at the root of the project.
-
-3. Add your key inside the `.env` file:
-   ```env
-   GOOGLE_API_KEY=your_api_key_here
+- compares answers from RAG vs RAG + NLI Sub-Claims,
+- inspects retrieved passages before and after filtering,
+- explains why one pipeline produces a more reliable answer.
 
 This component is intended as a pedagogical and interpretability tool, not as part of the core evaluation loop.
 
@@ -149,10 +146,15 @@ python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
 
 Some components (analysis agent) use Gemini 2.5 Flash.
 
-You need to generate an API key here:  
- https://aistudio.google.com/app/apikey
+1. Generate an API key here:
+   https://aistudio.google.com/app/apikey
 
-Paste your API key in the `code_api.txt` file at the root of the project.
+2. Create a file named `.env` at the root of the project.
+
+3. Add your key inside the `.env` file:
+   ```env
+   GOOGLE_API_KEY=your_api_key_here
+
 
 ## Optional: Docker Deployment
 
