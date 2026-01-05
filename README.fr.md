@@ -131,9 +131,6 @@ python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
 
 ## Configuration de la Clé API (Gemini)
 
-```markdown
-## Configuration de la Clé API (Gemini)
-
 Certains composants (notamment l'agent d'analyse) utilisent Gemini 2.5 Flash.
 
 1. Générez une clé API ici :
