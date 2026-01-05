@@ -50,6 +50,16 @@ Trois pipelines sont implémentés et comparés :
 
 Cela permet un filtrage plus fin, en particulier pour les questions comparatives ou compositionnelles.
 
+## Architecture du Système
+
+Le diagramme ci-dessous illustre le pipeline principal (**RAG + NLI + Sous-Affirmations**). Il détaille comment les requêtes complexes sont décomposées et comment le modèle NLI agit comme un filtre sémantique (*gatekeeper*) pour éliminer le bruit avant la génération.
+
+<p align="center">
+  <img src="docs/images/Graph_rag.png" alt="Architecture RAG avec NLI" width="600">
+  <br>
+  <em>(Figure : Flux de travail de la décomposition en sous-affirmations et du filtrage par implication NLI)</em>
+</p>
+
 ## Évaluation
 
 Les expériences ont été menées sur HotpotQA (configuration avec distracteurs).
