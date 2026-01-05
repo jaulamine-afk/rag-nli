@@ -1,5 +1,10 @@
 # RAG avec NLI et Décomposition en Sous-Affirmations
 
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)](https://www.docker.com/)
+[![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900)](https://aws.amazon.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 [English](README.md)
 
 Mon projet explore comment l'inférence en langage naturel (NLI) et la décomposition d'affirmations peuvent être intégrées dans un pipeline de génération augmentée par récupération (RAG) pour réduire le bruit de récupération et améliorer les réponses.
