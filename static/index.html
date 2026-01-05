@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAG vs RAG+NLI Analysis</title>
+    <title>RAG vs RAG+NLI Subclaim Analysis</title>
     <style>
         * {
             margin: 0;
@@ -333,7 +333,7 @@
         <div class="main-content">
             <div class="chat-area" id="chatArea">
                 <div class="empty-state">
-                    <h3>📊 RAG vs RAG+NLI</h3>
+                    <h3>📊 RAG vs RAG+NLI Subclaim</h3>
                     <p>Sélectionnez une question pour commencer</p>
                 </div>
             </div>
@@ -424,7 +424,7 @@
                     </div>
 
                     <div class="card nli ${nliCorrect ? 'correct' : 'incorrect'}">
-                        <div class="card-title nli">🟢 RAG + NLI ${nliCorrect ? '✅' : '❌'}</div>
+                        <div class="card-title nli">🟢 RAG + NLI Subclaim ${nliCorrect ? '✅' : '❌'}</div>
                         <div class="stat-row">
                             <span class="stat-label">Avant:</span>
                             <span class="stat-value">${data.rag_nli.passages_before}</span>

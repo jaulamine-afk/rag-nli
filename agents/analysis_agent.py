@@ -1,5 +1,6 @@
 from langchain.chat_models import init_chat_model
 import os
+from dotenv import load_dotenv
 
 
 class AgentAnalysis:
@@ -10,21 +11,17 @@ class AgentAnalysis:
 
     The goal is to explain clearly WHY one answer is more reliable than the other.
     """
-
     def __init__(self):
         # Load API key
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        file_path = os.path.join(BASE_DIR, "code_api.txt")
-
-        with open(file_path, "r") as f:
-            api_key = f.read().strip()
-
-        os.environ["GOOGLE_API_KEY"] = os.environ.get("GOOGLE_API_KEY", api_key)
-
+        dotenv_path = os.path.join(BASE_DIR, ".env")
+        
+        load_dotenv(dotenv_path)
+        print("ok ça marche")
         self.model = init_chat_model(
             "gemini-2.5-flash",
             model_provider="google_genai"
-        )
+    )
 
     def analyze(
         self,
