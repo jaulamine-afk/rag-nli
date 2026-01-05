@@ -39,7 +39,7 @@ class AgentAnalysis:
         """
 
         prompt = (
-            f"Answer in French. Keep your response SHORT and CONCISE (max 200 words). NO markdown formatting (no **, ##).\n"
+            f"Answer in english. Keep your response SHORT and CONCISE (max 200 words). NO markdown formatting (no **, ##).\n"
             f"You are analyzing two question-answering systems.\n\n"
 
             f"The original question is:\n"
