@@ -1,35 +1,41 @@
-# Evaluation Results
+# Evaluation Results: NLI-Enhanced RAG Pipeline
 
-This document presents the comparative evaluation of the three pipeline methods across different models and Top-K configurations.
+## Executive Summary
 
-# Experimental Setup
+This evaluation demonstrates that **Natural Language Inference (NLI) filtering significantly improves Retrieval-Augmented Generation (RAG) systems** across multiple model architectures. Testing three generator models on 100 HotpotQA questions, the RAG + NLI + Sub-Claims approach achieved **up to +37.5% improvement in Exact Match accuracy** compared to baseline RAG.
 
-## Dataset & Scope
-* **Dataset:** HotpotQA (distractor setting)
-* **Sample Size:** 100 questions
-* **Retrieval Corpus:** Index built from the contexts of 300 questions, **including** the contexts for the 100 evaluation questions. Using a corpus larger than the test set creates a realistic retrieval scenario with a naturally expanded search space.
+**Key Impact:** The method proves universally effective—all tested models benefit from NLI filtering, with improvements ranging from +12% to +55% in Exact Match. Performance gains increase substantially when dealing with more retrieval noise (Top-4 configuration), validating that semantic filtering addresses a fundamental RAG challenge.
 
-### Rationale for Sample Size
-Evaluation was limited to 100 questions due to:
-1.  **Compute Constraints:** NLI inference is CPU-intensive; scaling without GPUs was prohibitive.
-2.  **Testing Volume:** Combinatorial testing (Generators × Top-K) exponentially increased runtime.
-3.  **Heuristic Scope:** Decomposition currently relies on dataset-specific rules, not yet a generalizable LLM model.
+---
 
-## System Components
-* **Retriever:** SentenceTransformer (`all-MiniLM-L6-v2`) with FAISS indexing for dense retrieval.
-* **NLI Model:** `facebook/bart-large-mnli`.
-* **Generators Tested:**
-    * `google/flan-t5-small`
-    * `google/flan-t5-base`
-    * `allenai/unifiedqa-t5-small`
+## Key Findings
 
-## Configurations
-To analyze the impact of context window size and noise, we tested the following retrieval settings:
-* **Top-2:** Retrieve 2 most similar passages
-* **Top-3:** Retrieve 3 most similar passages
-* **Top-4:** Retrieve 4 most similar passages
+1. **NLI Filtering Consistently Improves Performance Across All Models:**
+   - The RAG + NLI approach shows gains over baseline for all three generator models
+   - Sub-Claims further enhances results, demonstrating the value of fine-grained filtering
+   - Improvement pattern holds across different model architectures and sizes
 
-> **Note:** Configurations above Top-4 showed significantly degraded performance and were excluded from analysis.
+2. **Sub-Claims Benefit Increases with Top-K:**
+   - At Top-2: Modest improvements (typically +10-16% EM)
+   - At Top-3: Stronger gains (+12-55% EM depending on model)
+   - At Top-4: **Most significant improvements** (up to +37.5% EM)
+   - This validates that NLI filtering is most valuable when dealing with more retrieval noise
+
+3. **Method Robustness Across Different Generator Models:**
+   - FLAN-T5-Small: Consistent +12-33% EM improvement with Sub-Claims
+   - FLAN-T5-Base: Progressive gains, peaking at +37.5% EM at Top-4
+   - UnifiedQA-T5-Small: Strong relative improvements (+27-55% EM)
+   - The NLI approach generalizes well regardless of generator architecture
+
+4. **Performance Degradation Pattern:**
+   - Baseline methods degrade faster as Top-K increases
+   - NLI-enhanced methods maintain more stable performance
+   - Sub-Claims provide the best robustness against retrieval noise
+
+5. **Universal Applicability:**
+   - All tested models benefit from NLI filtering
+   - Even models with lower absolute performance (UnifiedQA) show substantial relative gains
+   - The method works across different model families (FLAN-T5, UnifiedQA)
 
 ---
 
@@ -185,34 +191,34 @@ To analyze the impact of context window size and noise, we tested the following 
 
 ---
 
-## Key Findings
+## Experimental Setup
 
-1. **NLI Filtering Consistently Improves Performance Across All Models:**
-   - The RAG + NLI approach shows gains over baseline for all three generator models
-   - Sub-Claims further enhances results, demonstrating the value of fine-grained filtering
-   - Improvement pattern holds across different model architectures and sizes
+### Dataset & Scope
+* **Dataset:** HotpotQA (distractor setting)
+* **Sample Size:** 100 questions
+* **Retrieval Corpus:** Index built from the contexts of 300 questions, **including** the contexts for the 100 evaluation questions. Using a corpus larger than the test set creates a realistic retrieval scenario with a naturally expanded search space.
 
-2. **Sub-Claims Benefit Increases with Top-K:**
-   - At Top-2: Modest improvements (typically +10-16% EM)
-   - At Top-3: Stronger gains (+12-55% EM depending on model)
-   - At Top-4: **Most significant improvements** (up to +37.5% EM)
-   - This validates that NLI filtering is most valuable when dealing with more retrieval noise
+### Rationale for Sample Size
+Evaluation was limited to 100 questions due to:
+1.  **Compute Constraints:** NLI inference is CPU-intensive; scaling without GPUs was prohibitive.
+2.  **Testing Volume:** Combinatorial testing (Generators × Top-K) exponentially increased runtime.
+3.  **Heuristic Scope:** Decomposition currently relies on dataset-specific rules, not yet a generalizable LLM model.
 
-3. **Method Robustness Across Different Generator Models:**
-   - FLAN-T5-Small: Consistent +12-33% EM improvement with Sub-Claims
-   - FLAN-T5-Base: Progressive gains, peaking at +37.5% EM at Top-4
-   - UnifiedQA-T5-Small: Strong relative improvements (+27-55% EM)
-   - The NLI approach generalizes well regardless of generator architecture
+### System Components
+* **Retriever:** SentenceTransformer (`all-MiniLM-L6-v2`) with FAISS indexing for dense retrieval.
+* **NLI Model:** `facebook/bart-large-mnli`.
+* **Generators Tested:**
+    * `google/flan-t5-small`
+    * `google/flan-t5-base`
+    * `allenai/unifiedqa-t5-small`
 
-4. **Performance Degradation Pattern:**
-   - Baseline methods degrade faster as Top-K increases
-   - NLI-enhanced methods maintain more stable performance
-   - Sub-Claims provide the best robustness against retrieval noise
+### Configurations
+To analyze the impact of context window size and noise, we tested the following retrieval settings:
+* **Top-2:** Retrieve 2 most similar passages
+* **Top-3:** Retrieve 3 most similar passages
+* **Top-4:** Retrieve 4 most similar passages
 
-5. **Universal Applicability:**
-   - All tested models benefit from NLI filtering
-   - Even models with lower absolute performance (UnifiedQA) show substantial relative gains
-   - The method works across different model families (FLAN-T5, UnifiedQA)
+> **Note:** Configurations above Top-4 showed significantly degraded performance and were excluded from analysis.
 
 ---
 
