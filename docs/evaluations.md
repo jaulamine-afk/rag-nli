@@ -4,7 +4,7 @@
 
 This evaluation demonstrates that **Natural Language Inference (NLI) filtering significantly improves Retrieval-Augmented Generation (RAG) systems** across multiple model architectures. Through comprehensive testing across **9 configurations** (3 generator models × 3 Top-K settings) on HotpotQA, the RAG + NLI + Sub-Claims approach achieved **up to +37.5% improvement in Exact Match accuracy** compared to baseline RAG.
 
-**Key Impact:** The method proves universally effective—all tested models benefit from NLI filtering, with improvements ranging from +12% to +55% in Exact Match. Performance gains increase substantially when dealing with more retrieval noise (Top-4 configuration), validating that semantic filtering addresses a fundamental RAG challenge.
+**Key Impact:** The method proves universally effective all tested models benefit from NLI filtering, with improvements ranging from +12% to +55% in Exact Match. Performance gains increase substantially when dealing with more retrieval noise (Top-4 configuration), validating that semantic filtering addresses a fundamental RAG challenge.
 
 ---
 
