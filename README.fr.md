@@ -103,7 +103,7 @@ Ensuite, il explique *pourquoi* la correction a eu lieu : le module NLI a rejet�
   <img src="docs/images/Agent_analysis.png" alt="Analyse Logique Agent" width="600">
 </p>
 
-Ce composant est conçu comme un outil pédagogique et d'interprétabilité, et non comme partie intégrante de la boucle d'évaluation principale.
+Cet agent est utilisé en phase de développement pour analyser les décisions du pipeline, comparer les performances du RAG classique et du RAG filtré, et faciliter le diagnostic des erreurs ainsi que l’optimisation du système.
 
 ## Structure du Projet
 
