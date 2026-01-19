@@ -104,7 +104,9 @@ Then, it explains *why* the correction happened: the NLI module successfully fil
   <img src="docs/images/Agent_analysis.png" alt="Agent Logic Analysis" width="600">
 </p>
 
-*This component is intended as a pedagogical and interpretability tool, not as part of the core evaluation loop.*
+*This agent is used during development to analyze pipeline decisions
+and compare baseline vs filtered outputs, providing actionable
+insights for system tuning and error analysis.*
 
 
 ## Project Structure
