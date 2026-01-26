@@ -85,7 +85,7 @@ Les résultats détaillés (par modèle et par Top-K) sont disponibles dans :
 [`docs/evaluations.md`](docs/evaluations.md)
 
 
-## Agent d'Analyse (Démonstration)
+## Agent d'Analyse
 
 Le projet inclut un agent d'analyse propulsé par Gemini qui inspecte les décisions du pipeline.
 
