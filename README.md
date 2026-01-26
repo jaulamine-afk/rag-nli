@@ -86,7 +86,7 @@ Detailed evaluation results (per model and Top-K) are available in:
 [`docs/evaluations.md`](docs/evaluations.md)
 
 
-## Analysis Agent (Demonstration)
+## Analysis Agent
 
 The project includes an analysis agent powered by Gemini that inspects the pipeline's decisions.
 
