@@ -150,19 +150,6 @@ The system uses a three-stage intelligent filtering approach:
 
 ### Advanced Architecture
 
-For complex questions like *"Which album sold more: Usher's or Rihanna's?"*, the system:
-
-1. **Decomposes** the question into sub-claims:
-   - Sub-claim 1: "Usher released an album"
-   - Sub-claim 2: "Rihanna released an album"
-   - Sub-claim 3: "Compare their sales"
-
-2. **Validates** each retrieved document against relevant sub-claims
-
-3. **Filters** documents that don't support any sub-claim
-
-4. **Generates** answer using only validated information
-
 <p align="center">
   <img src="docs/images/Graph_rag_nli_sub.png" alt="RAG with NLI Architecture" width="600">
   <br>
