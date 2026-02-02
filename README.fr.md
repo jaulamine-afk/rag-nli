@@ -58,7 +58,6 @@ Les chatbots et systèmes de Q&A standards souffrent souvent de problèmes criti
 |----------|--------------------------|
 | **Précision des Réponses (Exact Match)** | **+16%** |
 | **Qualité des Réponses (Score F1)** | **+10%** |
-| **BERTScore F1** | **+38%** |
 
 Ces améliorations proviennent de la **réduction intelligente du bruit de récupération**, pas simplement de plus de puissance de calcul.
 
@@ -68,30 +67,41 @@ Ces améliorations proviennent de la **réduction intelligente du bruit de récu
 
 ## 🚀 Démarrage Rapide
 
-### Testez en 5 minutes
+### 1. Installer les dépendances
 
 ```bash
-# 1. Cloner et installer les dépendances
-git clone [url-de-votre-repo]
-cd rag-nli
 pip install -r requirements.txt
-
-# 2. Lancer le serveur API
-python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
-
-# 3. Tester avec une question
-curl -X POST http://localhost:8001/ask \
-  -H "Content-Type: application/json" \
-  -d '{"question": "Quel album d'Usher est devenu disque de diamant ?"}'
 ```
 
-### Lancer les expériences d'évaluation
+### 2. Lancer les expériences
 
 ```bash
 python -m scripts.run_experiments
 ```
 
-Cela exécute tous les pipelines sur un sous-ensemble de HotpotQA et affiche les métriques comparatives.
+Cela exécutera tous les pipelines sur un sous-ensemble de HotpotQA et affichera les métriques d'évaluation.
+
+### 3. Lancer l'API
+
+Le projet expose un service FastAPI pour la réponse aux questions.
+
+```bash
+python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
+```
+
+## Configuration de la Clé API (Gemini)
+
+Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
+
+1. Générez une clé API ici :
+   [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+
+2. Créez un fichier nommé `.env` à la racine du projet.
+
+3. Ajoutez votre clé dans le fichier `.env` :
+   ```env
+   GOOGLE_API_KEY=votre_cle_api_ici
+   ```
 
 ---
 
@@ -139,19 +149,6 @@ Le système utilise une approche de filtrage intelligent en trois étapes :
 | **RAG + NLI + Sous-Affirmations** | Décompose les questions complexes en parties plus simples | Questions multi-parties, comparatives |
 
 ### Architecture Avancée
-
-Pour les questions complexes comme *"Quel album s'est le plus vendu : celui d'Usher ou celui de Rihanna ?"*, le système :
-
-1. **Décompose** la question en sous-affirmations :
-   - Sous-affirmation 1 : "Usher a sorti un album"
-   - Sous-affirmation 2 : "Rihanna a sorti un album"
-   - Sous-affirmation 3 : "Comparer leurs ventes"
-
-2. **Valide** chaque document récupéré contre les sous-affirmations pertinentes
-
-3. **Filtre** les documents qui ne supportent aucune sous-affirmation
-
-4. **Génère** une réponse en utilisant uniquement les informations validées
 
 <p align="center">
   <img src="docs/images/Graph_rag_nli_sub.png" alt="Architecture RAG avec NLI" width="600">
@@ -210,25 +207,6 @@ curl http://localhost:8001/health
 - Développement local (Linux/macOS/Windows)
 - AWS EC2 (Ubuntu)
 - Services de conteneurs cloud (compatible ECS, Cloud Run)
-
----
-
-## ⚙️ Configuration de l'API
-
-### API Gemini (pour l'Agent d'Analyse)
-
-Certaines fonctionnalités utilisent Gemini 2.5 Flash de Google pour l'analyse avancée.
-
-**Configuration :**
-
-1. Obtenir une clé API : [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
-
-2. Créer un fichier `.env` à la racine du projet :
-   ```env
-   GOOGLE_API_KEY=votre_cle_api_ici
-   ```
-
-3. L'agent d'analyse utilisera automatiquement cette clé
 
 ---
 
@@ -316,21 +294,7 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ---
 
-## 🤝 Contribuer
 
-Les contributions sont les bienvenues ! N'hésitez pas à soumettre des issues ou des pull requests.
-
-**Domaines de contribution :**
-- Datasets d'évaluation supplémentaires
-- Fine-tuning de modèles NLI spécifiques au domaine
-- Stratégies alternatives de décomposition en sous-affirmations
-- Optimisation des performances
-
----
-
-## 📧 Contact
-
-Questions ? Contactez via [GitHub Issues](url-de-votre-repo/issues) ou [votre méthode de contact].
 
 ---
 
