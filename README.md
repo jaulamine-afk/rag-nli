@@ -58,7 +58,6 @@ Standard chatbots and Q&A systems often suffer from critical issues:
 |--------|-------------------------|
 | **Answer Accuracy (Exact Match)** | **+16%** |
 | **Answer Quality (F1 Score)** | **+10%** |
-| **BERTScore F1** | **+38%** |
 
 These improvements stem from **intelligent retrieval noise reduction**, not just throwing more compute at the problem.
 
@@ -68,30 +67,41 @@ These improvements stem from **intelligent retrieval noise reduction**, not just
 
 ## 🚀 Quick Start
 
-### Try it in 5 minutes
+### 1. Install dependencies
 
 ```bash
-# 1. Clone and install dependencies
-git clone [your-repo-url]
-cd rag-nli
 pip install -r requirements.txt
-
-# 2. Run the API server
-python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
-
-# 3. Test with a question
-curl -X POST http://localhost:8001/ask \
-  -H "Content-Type: application/json" \
-  -d '{"question": "What album did Usher release that went diamond?"}'
 ```
 
-### Run evaluation experiments
+### 2. Run experiments
 
 ```bash
 python -m scripts.run_experiments
 ```
 
-This runs all pipelines on a subset of HotpotQA and outputs comparative metrics.
+This will run all pipelines on a subset of HotpotQA and output evaluation metrics.
+
+### 3. Run the API
+
+The project exposes a FastAPI service for question answering.
+
+```bash
+python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
+```
+
+## API Key Configuration (Gemini)
+
+Some components (analysis agent) use Gemini 2.5 Flash.
+
+1. Generate an API key here:
+   [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+
+2. Create a file named `.env` at the root of the project.
+
+3. Add your key inside the `.env` file:
+   ```env
+   GOOGLE_API_KEY=your_api_key_here
+   ```
 
 ---
 
@@ -210,25 +220,6 @@ curl http://localhost:8001/health
 - Local development (Linux/macOS/Windows)
 - AWS EC2 (Ubuntu)
 - Cloud container services (ECS, Cloud Run compatible)
-
----
-
-## ⚙️ API Configuration
-
-### Gemini API (for Analysis Agent)
-
-Some features use Google's Gemini 2.5 Flash for advanced analysis.
-
-**Setup:**
-
-1. Get an API key: [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
-
-2. Create `.env` file at project root:
-   ```env
-   GOOGLE_API_KEY=your_api_key_here
-   ```
-
-3. The analysis agent will automatically use this key
 
 ---
 
