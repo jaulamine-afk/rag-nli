@@ -7,9 +7,9 @@
 
 [English](README.md)
 
-Système de génération augmentée par récupération (RAG) prêt pour la production qui filtre les informations non pertinentes avant la génération de réponses, offrant des réponses IA plus précises et fiables.
+Système RAG prêt pour la production qui filtre les informations non pertinentes avant la génération de réponses, offrant des réponses IA plus précises et fiables.
 
-**Parfait pour :** Support client, analyse de documents juridiques, recherche dans la documentation technique, vérification de conformité
+**Particulièrement adapté à :** Support client, analyse de documents juridiques, recherche dans la documentation technique, vérification de conformité
 
 ---
 
