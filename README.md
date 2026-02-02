@@ -319,10 +319,3 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 
 ---
 
-## 📧 Contact
-
-Questions? Reach out via [GitHub Issues](your-repo-url/issues) or [your contact method].
-
----
-
-**Ready to reduce hallucinations in your RAG system? [Get started now](#quick-start)**
