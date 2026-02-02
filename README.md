@@ -83,23 +83,6 @@ The system uses a three-stage intelligent filtering approach:
 
 ---
 
-## Quick Demo
-
-**Problem:** Standard RAG systems hallucinate when documents contain misleading information.
-
-**Question:** *"What album did Usher release that went diamond?"*
-
-| System | Answer | Status |
-|--------|--------|--------|
-| **Baseline RAG** | "Rihanna's album..." | ❌ Wrong (confused by noise) |
-| **RAG + NLI + Sub-Claims** | "Confessions" | ✅ Correct (filtered noise) |
-
-**How?** The system detected that the Rihanna document didn't actually answer the question about Usher, filtered it out, and used only verified information.
-
----
-
-
-
 ## Quick Start
 
 ### 1. Install dependencies
