@@ -5,6 +5,8 @@
 [![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900)](https://aws.amazon.com/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
+[Français](README.fr.md)
+
 
 Production-ready Retrieval-Augmented Generation system that filters out irrelevant information before answer generation, delivering more accurate and trustworthy AI responses.
 
