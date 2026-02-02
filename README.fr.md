@@ -1,4 +1,4 @@
-# Pipeline RAG Intelligent - Amélioration de la Précision des Réponses par Filtrage Intelligent
+# RAG avec NLI et Décomposition en Sous-Affirmations
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)](https://www.docker.com/)
@@ -7,107 +7,123 @@
 
 [English](README.md)
 
-Système de génération augmentée par récupération (RAG) production-ready qui filtre les informations non pertinentes avant la génération de réponses, offrant des résultats IA plus précis et fiables.
+Mon projet explore comment l'inférence en langage naturel (NLI) et la décomposition d'affirmations peuvent être intégrées dans un pipeline de génération augmentée par récupération (RAG) pour réduire le bruit de récupération et améliorer les réponses.
 
-**Parfait pour :** Support client, analyse de documents juridiques, recherche dans la documentation technique, vérification de conformité
 
----
 
-## Impact
+## Motivation
 
-Les chatbots et systèmes de Q&A standards souffrent souvent de problèmes critiques :
+Les systèmes RAG standards récupèrent souvent des passages qui sont :
 
-- ❌ **Hallucinations** - Donnent des réponses confiantes mais incorrectes
-- ❌ **Bruit informationnel** - Mélangent informations pertinentes et non pertinentes
-- ❌ **Échecs sur questions complexes** - Peinent avec les questions multi-parties
+- vaguement liés à la question,
+- partiellement contradictoires,
+- ou non pertinents mais sémantiquement similaires.
 
-**Ce système résout ces problèmes en :**
+Ce bruit peut perturber le générateur et dégrader la qualité des réponses.
 
-- ✅ Filtrant le bruit avant de générer les réponses (améliorations démontrées de la précision)
-- ✅ Validant chaque information indépendamment
-- ✅ Gérant les questions complexes nécessitant plusieurs sources
+Ce projet propose :
 
-**Impact réel :**
-- Réduction des erreurs et du temps de réponse du support client
-- Révision de documents plus rapide pour les équipes juridiques et de conformité
-- Recherche dans les bases de connaissances plus fiable
-- Réduction des coûts opérationnels grâce à moins de réponses incorrectes
+- d'utiliser un filtrage NLI basé sur l'implication pour ne conserver que les passages qui soutiennent logiquement une affirmation,
+- et une extension basée sur la décomposition en sous-affirmations pour les questions comparatives ou multi-entités.
 
----
-## Fonctionnement
+## Aperçu de l'Approche
 
-### Vue d'Ensemble Simple
+Trois pipelines sont implémentés et comparés :
 
-Le système utilise une approche de filtrage intelligent en trois étapes :
+### RAG de Base
 
-1. **Récupération** - Recherche de documents potentiellement pertinents via recherche vectorielle dense (FAISS)
-2. **Vérification** - L'IA valide chaque document : *"Cette information supporte-t-elle réellement la réponse à la question ?"*
-3. **Filtrage** - Ne conserve que les informations vérifiées et pertinentes
-4. **Génération** - Crée une réponse à partir de données propres et validées uniquement
+- Récupération dense (FAISS)
+- Génération basée sur des prompts
 
-### Trois Variantes de Pipeline
+### RAG + NLI
 
-| Pipeline | Description |
-|----------|-------------|
-| **RAG Baseline** | Récupération + génération standard | 
-| **RAG + NLI** | Ajoute un filtrage intelligent via inférence en langage naturel |
-| **RAG + NLI + Sous-Affirmations** | Décompose les questions complexes en parties plus simples |
+- Les passages récupérés sont filtrés à l'aide d'un modèle NLI
+- Seuls les passages qui impliquent l'affirmation sont conservés 
+- Une explication détaillée de la méthode est disponible ici [RAG + NLI](docs/rag_nli.md).
 
-### Architecture 
+### RAG + NLI + Sous-Affirmations
+
+- Les affirmations complexes sont décomposées en sous-affirmations plus simples
+- Chaque sous-affirmation est validée indépendamment avec NLI
+- Les passages ne sont conservés que s'ils soutiennent au moins une sous-affirmation
+- Une explication détaillée de la méthode est disponible ici [RAG + NLI + Sub-Claims](docs/rag_nli_subclaim.md).
+
+Cela permet un filtrage plus fin, en particulier pour les questions comparatives ou compositionnelles.
+
+## Architecture du Système
+
+Le diagramme ci-dessous illustre le pipeline principal (**RAG + NLI + Sous-Affirmations**). Il détaille comment les requêtes complexes sont décomposées et comment le modèle NLI agit comme un filtre sémantique (*gatekeeper*) pour éliminer le bruit avant la génération.
 
 <p align="center">
   <img src="docs/images/Graph_rag_nli_sub.png" alt="Architecture RAG avec NLI" width="600">
   <br>
-  <em>Workflow de Décomposition en Sous-Affirmations et Filtrage par Implication NLI</em>
+  <em>(Figure : Flux de travail de la décomposition en sous-affirmations et du filtrage par implication NLI)</em>
 </p>
 
-📖 **Explications techniques détaillées :**
-- [Explication détaillée RAG + NLI](docs/rag_nli.md)
-- [Explication détaillée RAG + NLI + Sous-Affirmations](docs/rag_nli_subclaim.md)
+## Évaluation
 
----
+Les expériences ont été menées sur HotpotQA (configuration avec distracteurs).
 
-## Métriques
+**Métriques utilisées :**
 
-**Évaluation sur le benchmark de référence HotpotQA :**
+- Exact Match
+- F1
+- BERTScore (Précision / Rappel / F1)
 
-| Métrique | Amélioration vs Baseline |
-|----------|--------------------------|
-| **Précision des Réponses (Exact Match)** | **+16%** |
-| **Qualité des Réponses (Score F1)** | **+10%** |
+   **Résultats clés :**  
+Avec notre pipeline le plus avancé (**RAG + NLI + Subclaims**) on observe jusqu’à **+16 % d’amélioration en Exact Match** et **+10 % en F1** par rapport au RAG de base, selon le modèle et la configuration Top-K.
 
-Ces améliorations proviennent de la **réduction intelligente du bruit de récupération**, pas simplement de plus de puissance de calcul.
+Ces gains proviennent principalement de la **réduction du bruit de retrieval**, grâce au filtrage par inférence logique (NLI) et à la décomposition en sous-claims, plutôt que d’une simple augmentation de la capacité du générateur.
 
-📈 [Voir les résultats d'évaluation détaillés](docs/evaluations.md)
+Les résultats montrent des améliorations constantes par rapport au RAG de base, avec :
 
----
+- réduction des passages non pertinents ou hors sujet,
+- amélioration de l’ancrage factuel des réponses,
+- gains plus nets pour les questions compositionnelles ou comparatives.
+
+Les résultats détaillés (par modèle et par Top-K) sont disponibles dans :  
+[`docs/evaluations.md`](docs/evaluations.md)
+
+
 ## Agent d'Analyse
 
-Agent de débogage intégré propulsé par Gemini qui explique les décisions du pipeline en langage naturel.
-
-**Exemple d'Analyse :**
+Le projet inclut un agent d'analyse propulsé par Gemini qui inspecte les décisions du pipeline.
 
 **1. Comparaison des Résultats :**
+L'agent affiche d'abord l'affirmation générée et compare les réponses. La baseline échoue (hallucination) tandis que notre système réussit.
 
 <p align="center">
   <img src="docs/images/Agent_compare.png" alt="Comparaison RAG vs NLI" width="600">
 </p>
 
-L'agent montre comment la baseline échoue (hallucination) tandis que le système filtré réussit.
-
-**2. Comprendre Pourquoi :**
+**2. Raisonnement & Filtrage :**
+Ensuite, il explique *pourquoi* la correction a eu lieu : le module NLI a rejeté le passage "piège" sur Rihanna car il ne validait pas l'affirmation concernant l'album "Confessions".
 
 <p align="center">
   <img src="docs/images/Agent_analysis.png" alt="Analyse Logique Agent" width="600">
 </p>
 
-L'agent explique que le module NLI a filtré avec succès le passage "distracteur" sur Rihanna car il ne validait pas l'affirmation sur l'album "Confessions" d'Usher.
+Cet agent est utilisé en phase de développement pour analyser les décisions du pipeline, comparer les performances du RAG classique et du RAG filtré, et faciliter le diagnostic des erreurs ainsi que l’optimisation du système.
 
-*Cet agent aide pendant le développement à analyser les décisions du pipeline, comparer les sorties baseline vs filtrées, et fournit des insights actionnables pour l'optimisation du système.*
+## Structure du Projet
 
----
+```
+rag-nli-subclaim/
+│
+├── rag/                 # Récupération et génération
+├── nli/                 # Modèle NLI et logique de filtrage
+├── pipelines/           # RAG / RAG+NLI / RAG+NLI+Subclaim
+├── evaluation/          # Métriques et expériences
+├── agents/              # Agent d'analyse
+├── api/                 # Service FastAPI
+├── scripts/             # Lanceurs d'expériences
+├── data/
+├── docs/
+└── Dockerfile              
+└── README.md
+```
 
-## Démarrage Rapide
+## Exécution du Projet
 
 ### 1. Installer les dépendances
 
@@ -125,7 +141,7 @@ Cela exécutera tous les pipelines sur un sous-ensemble de HotpotQA et affichera
 
 ### 3. Lancer l'API
 
-Le projet expose un service FastAPI qui donne accès à un agent d'analyse.
+Le projet expose un service FastAPI pour la réponse aux questions.
 
 ```bash
 python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
@@ -133,7 +149,7 @@ python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
 
 ## Configuration de la Clé API (Gemini)
 
-Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
+Certains composants (notamment l'agent d'analyse) utilisent Gemini 2.5 Flash.
 
 1. Générez une clé API ici :
    [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
@@ -142,99 +158,46 @@ Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
 
 3. Ajoutez votre clé dans le fichier `.env` :
    ```env
-   GOOGLE_API_KEY=votre_cle_api_ici
-   ```
+   GOOGLE_API_KEY=votre_cle_ici
+   
+## Optionnel : Déploiement Docker
 
----
-## Déploiement Docker
+Le projet peut également être conteneurisé avec Docker pour faciliter le déploiement et la reproductibilité.
 
-Déploiement conteneurisé prêt pour la production :
+Un Dockerfile est fourni pour :
+
+- installer les dépendances,
+- exposer le service FastAPI,
+- exécuter l'application dans un environnement reproductible.
+
+**Commandes d'exemple :**
 
 ```bash
-# Construire l'image Docker
 docker build -t rag-nli-app .
-
-# Lancer le conteneur
 docker run -p 8001:8001 rag-nli-app
-
-# Accéder à l'API
-curl http://localhost:8001/health
 ```
 
-**Déploiement testé sur :**
-- Développement local (Linux/macOS/Windows)
-- AWS EC2 (Ubuntu)
-- Services de conteneurs cloud (compatible ECS, Cloud Run)
+Cette configuration a été testée localement et déployée sur une instance AWS EC2 (Ubuntu).
 
----
+## Limitations
 
-## Applications Concrètes
+- La décomposition en sous-affirmations est basée sur des règles et heuristique
+- Toutes les affirmations dans HotpotQA ne sont pas décomposables
+- Pas de tests de significativité statistique (configuration CPU uniquement)
+- L'accent est mis sur la réduction du bruit de récupération, pas sur la prévention complète des hallucinations
 
-| Domaine |
-|---------|
-| **Support Client** |
-| **Juridique & Conformité** |
-| **Documentation Technique** |
-| **Information Médicale** |
+Ces limitations sont discutées de manière transparente pour souligner le réalisme et la reproductibilité.
 
+## Technologies
 
-## Structure du Projet
-
-```
-rag-nli/
-│
-├── rag/                 # Modules de récupération & génération
-├── nli/                 # Modèle NLI et logique de filtrage
-├── pipelines/           # Implémentations des pipelines
-│   ├── baseline.py      # RAG standard
-│   ├── nli.py           # RAG + filtrage NLI
-│   └── subclaim.py      # RAG + NLI + Sous-affirmations
-├── evaluation/          # Métriques et lanceurs d'expériences
-├── agents/              # Agent d'analyse pour le débogage
-├── api/                 # Service FastAPI
-├── scripts/             # Scripts d'exécution d'expériences
-├── data/                # Stockage des datasets
-├── docs/                # Documentation détaillée
-├── Dockerfile           # Configuration du conteneur
-└── README.md
-```
-
-## Limitations & Améliorations
-
-**Limitations actuelles :**
-- La décomposition en sous-affirmations utilise des heuristiques basées sur des règles (peut être améliorée avec décomposition apprise)
-- Tous les types de questions dans HotpotQA ne bénéficient pas également de la décomposition
-- Évaluation réalisée sur CPU uniquement (pas encore de tests de significativité statistique)
-- Évaluation à échelle proof-of-concept (démontre la méthodologie sur un sous-ensemble du benchmark)
-- Focus sur la réduction du bruit de récupération, pas la prévention complète des hallucinations
-
-**Améliorations futures :**
-- Génération de sous-affirmations apprise utilisant des LLMs
-- Évaluation accélérée par GPU pour tests statistiques
-- Couverture de datasets élargie au-delà de HotpotQA
-- Modèles NLI fine-tunés pour des cas d'usage spécifiques au domaine
-
-Ces limitations sont reconnues pour souligner le réalisme et guider le développement futur.
-
----
-
-## Technologies 
-
-**Technologies Principales :**
-- **Python 3.10+** - Langage de programmation principal
-- **FastAPI** - Framework API de production
-- **Docker** - Conteneurisation
-
-**Stack IA/ML :**
-- **Hugging Face Transformers** - Modèles NLI et génération de texte
-- **FAISS** - Recherche rapide de similarité vectorielle
-- **LangChain / LangGraph** - Orchestration de pipelines
-
-**Déploiement :**
-- **AWS EC2** - Déploiement cloud testé
-- **Google Gemini** - Agent d'analyse
-
----
+- Python
+- Hugging Face
+- FAISS
+- FastAPI
+- LangChain / LangGraph
+- Docker
+- AWS
+- Gemini (Google GenAI)
 
 ## Références
 
@@ -247,5 +210,3 @@ Ces limitations sont reconnues pour souligner le réalisme et guider le dévelop
 [4] Shahul Es, et al. "RAGAS: Automated Evaluation of Retrieval Augmented Generation." EACL, 2024. (Framework used for defining Faithfulness metrics via NLI).
 
 [5] Nelson F. Liu, et al. "Lost in the Middle: How Language Models Use Long Contexts." TACL, 2024. (Highlights the necessity of filtering to avoid performance degradation in long contexts).
-
----
