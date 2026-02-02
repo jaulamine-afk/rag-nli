@@ -47,11 +47,11 @@ Le système utilise une approche de filtrage intelligent en trois étapes :
 
 ### Trois Variantes de Pipeline
 
-| Pipeline | Description | Idéal Pour |
-|----------|-------------|------------|
-| **RAG Baseline** | Récupération + génération standard | Questions factuelles simples |
-| **RAG + NLI** | Ajoute un filtrage intelligent via inférence en langage naturel | Q&A général avec réduction du bruit |
-| **RAG + NLI + Sous-Affirmations** | Décompose les questions complexes en parties plus simples | Questions multi-parties, comparatives |
+| Pipeline | Description |
+|----------|-------------|
+| **RAG Baseline** | Récupération + génération standard | 
+| **RAG + NLI** | Ajoute un filtrage intelligent via inférence en langage naturel |
+| **RAG + NLI + Sous-Affirmations** | Décompose les questions complexes en parties plus simples |
 
 ### Architecture 
 
