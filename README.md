@@ -35,6 +35,39 @@ Standard chatbots and Q&A systems often suffer from critical issues:
 
 ---
 
+## How It Works
+
+### Simple Overview
+
+The system uses a three-stage intelligent filtering approach:
+
+1. **Retrieve** - Search for potentially relevant documents using dense vector search (FAISS)
+2. **Verify** - AI validates each document: *"Does this information actually support answering the question?"*
+3. **Filter** - Keep only verified, relevant information
+4. **Generate** - Create answer from clean, validated data only
+
+### Three Pipeline Variants
+
+| Pipeline | Description | Best For |
+|----------|-------------|----------|
+| **RAG Baseline** | Standard retrieval + generation | Simple factual questions |
+| **RAG + NLI** | Adds intelligent filtering using Natural Language Inference | General Q&A with noise reduction |
+| **RAG + NLI + Sub-Claims** | Decomposes complex questions into simpler parts | Multi-part, comparative questions |
+
+### Advanced Architecture
+
+<p align="center">
+  <img src="docs/images/Graph_rag_nli_sub.png" alt="RAG with NLI Architecture" width="600">
+  <br>
+  <em>Workflow of Sub-Claim Decomposition and NLI Entailment Filtering</em>
+</p>
+
+📖 **Technical deep-dives:**
+- [RAG + NLI detailed explanation](docs/rag_nli.md)
+- [RAG + NLI + Sub-Claims detailed explanation](docs/rag_nli_subclaim.md)
+
+---
+
 ## Quick Demo
 
 **Problem:** Standard RAG systems hallucinate when documents contain misleading information.
@@ -44,7 +77,7 @@ Standard chatbots and Q&A systems often suffer from critical issues:
 | System | Answer | Status |
 |--------|--------|--------|
 | **Baseline RAG** | "Rihanna's album..." | ❌ Wrong (confused by noise) |
-| **Smart RAG** | "Confessions" | ✅ Correct (filtered noise) |
+| **RAG + NLI + Sub-Claims** | "Confessions" | ✅ Correct (filtered noise) |
 
 **How?** The system detected that the Rihanna document didn't actually answer the question about Usher, filtered it out, and used only verified information.
 
@@ -129,38 +162,6 @@ Some components (analysis agent) use Gemini 2.5 Flash.
 
 ---
 
-## How It Works
-
-### Simple Overview
-
-The system uses a three-stage intelligent filtering approach:
-
-1. **Retrieve** - Search for potentially relevant documents using dense vector search (FAISS)
-2. **Verify** - AI validates each document: *"Does this information actually support answering the question?"*
-3. **Filter** - Keep only verified, relevant information
-4. **Generate** - Create answer from clean, validated data only
-
-### Three Pipeline Variants
-
-| Pipeline | Description | Best For |
-|----------|-------------|----------|
-| **RAG Baseline** | Standard retrieval + generation | Simple factual questions |
-| **RAG + NLI** | Adds intelligent filtering using Natural Language Inference | General Q&A with noise reduction |
-| **RAG + NLI + Sub-Claims** | Decomposes complex questions into simpler parts | Multi-part, comparative questions |
-
-### Advanced Architecture
-
-<p align="center">
-  <img src="docs/images/Graph_rag_nli_sub.png" alt="RAG with NLI Architecture" width="600">
-  <br>
-  <em>Workflow of Sub-Claim Decomposition and NLI Entailment Filtering</em>
-</p>
-
-📖 **Technical deep-dives:**
-- [RAG + NLI detailed explanation](docs/rag_nli.md)
-- [RAG + NLI + Sub-Claims detailed explanation](docs/rag_nli_subclaim.md)
-
----
 
 ## Analysis Agent
 
