@@ -10,7 +10,7 @@
 
 Production-ready Retrieval-Augmented Generation system that filters out irrelevant information before answer generation, delivering more accurate and trustworthy AI responses.
 
-**Perfect for:** Customer support, legal document analysis, technical documentation search, compliance verification
+**Use cases:** Customer support, legal document analysis, technical documentation search, compliance verification
 
 ---
 
