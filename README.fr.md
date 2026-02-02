@@ -13,7 +13,7 @@ Système de génération augmentée par récupération (RAG) production-ready qu
 
 ---
 
-## 🎯 Pourquoi C'est Important
+## Pourquoi C'est Important
 
 Les chatbots et systèmes de Q&A standards souffrent souvent de problèmes critiques :
 
@@ -35,7 +35,7 @@ Les chatbots et systèmes de Q&A standards souffrent souvent de problèmes criti
 
 ---
 
-## 💡 Démonstration Rapide
+## Démonstration Rapide
 
 **Problème :** Les systèmes RAG standards hallucinent lorsque les documents contiennent des informations trompeuses.
 
@@ -50,7 +50,7 @@ Les chatbots et systèmes de Q&A standards souffrent souvent de problèmes criti
 
 ---
 
-## 📊 Métriques de Performance
+## Métriques de Performance
 
 **Évaluation sur le benchmark de référence HotpotQA :**
 
@@ -65,7 +65,7 @@ Ces améliorations proviennent de la **réduction intelligente du bruit de récu
 
 ---
 
-## 🚀 Démarrage Rapide
+## Démarrage Rapide
 
 ### 1. Installer les dépendances
 
@@ -105,31 +105,31 @@ Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
 
 ---
 
-## 🎯 Applications Concrètes
+## Applications Concrètes
 
-### 📞 Support Client
+### Support Client
 **Problème :** Les agents donnent des réponses incohérentes à partir de bases de connaissances bruitées  
 **Solution :** Filtrage des articles non pertinents → réponses plus rapides et précises  
 **Impact :** Réduction du temps de résolution des tickets, amélioration des scores de satisfaction client
 
-### ⚖️ Juridique & Conformité
+### Juridique & Conformité
 **Problème :** La révision de documents nécessite de valider des affirmations contre plusieurs sources  
 **Solution :** Validation multi-sources avec vérification d'implication  
 **Impact :** Réduction du risque de responsabilité, analyse de contrats plus rapide
 
-### 📚 Documentation Technique
+### Documentation Technique
 **Problème :** Les questions "comment faire" complexes nécessitent des informations de plusieurs documents  
 **Solution :** La décomposition en sous-affirmations gère les questions multi-étapes  
 **Impact :** Meilleure expérience développeur, réduction de la charge du support
 
-### 🏥 Information Médicale
+### Information Médicale
 **Problème :** Les conseils médicaux nécessitent une haute précision et une vérification des sources  
 **Solution :** Validation indépendante de chaque information  
 **Impact :** Fourniture d'informations médicales plus sûres et fiables
 
 ---
 
-## 🏗️ Comment Ça Marche
+## Comment Ça Marche
 
 ### Vue d'Ensemble Simple
 
@@ -162,7 +162,7 @@ Le système utilise une approche de filtrage intelligent en trois étapes :
 
 ---
 
-## 🔍 Agent d'Analyse
+## Agent d'Analyse
 
 Agent de débogage intégré propulsé par Gemini qui explique les décisions du pipeline en langage naturel.
 
@@ -188,7 +188,7 @@ L'agent explique que le module NLI a filtré avec succès le passage "distracteu
 
 ---
 
-## 🐳 Déploiement Docker
+## Déploiement Docker
 
 Déploiement conteneurisé prêt pour la production :
 
@@ -210,7 +210,7 @@ curl http://localhost:8001/health
 
 ---
 
-## 📁 Structure du Projet
+## Structure du Projet
 
 ```
 rag-nli/
@@ -233,7 +233,7 @@ rag-nli/
 
 ---
 
-## 🛠️ Technologies Utilisées
+## Technologies Utilisées
 
 **Technologies Principales :**
 - **Python 3.10+** - Langage de programmation principal
@@ -251,7 +251,7 @@ rag-nli/
 
 ---
 
-## ⚠️ Limitations Actuelles & Feuille de Route
+## Limitations Actuelles & Feuille de Route
 
 **Limitations actuelles :**
 - La décomposition en sous-affirmations utilise des heuristiques basées sur des règles (peut être améliorée avec décomposition apprise)
@@ -270,7 +270,7 @@ Ces limitations sont reconnues pour souligner le réalisme et guider le dévelop
 
 ---
 
-## 📚 Contexte Recherche
+## Contexte Recherche
 
 Ce projet s'appuie sur les avancées récentes en fiabilité des systèmes RAG :
 
@@ -287,15 +287,3 @@ Ce projet s'appuie sur les avancées récentes en fiabilité des systèmes RAG :
 [5] Nelson F. Liu, et al. *"Lost in the Middle: How Language Models Use Long Contexts."* TACL, 2024.
 
 ---
-
-## 📄 Licence
-
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
----
-
-
-
----
-
-**Prêt à réduire les hallucinations dans votre système RAG ? [Commencez maintenant](#démarrage-rapide)**
