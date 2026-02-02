@@ -35,6 +35,21 @@ Standard chatbots and Q&A systems often suffer from critical issues:
 
 ---
 
+## Performance Metrics
+
+**Evaluation on industry-standard HotpotQA benchmark:**
+
+| Metric | Improvement vs Baseline |
+|--------|-------------------------|
+| **Answer Accuracy (Exact Match)** | **+16%** |
+| **Answer Quality (F1 Score)** | **+10%** |
+
+These improvements stem from **intelligent retrieval noise reduction**, not just throwing more compute at the problem.
+
+📈 [View detailed evaluation results](docs/evaluations.md)
+
+---
+
 ## How It Works
 
 ### Simple Overview
@@ -83,20 +98,7 @@ The system uses a three-stage intelligent filtering approach:
 
 ---
 
-## Performance Metrics
 
-**Evaluation on industry-standard HotpotQA benchmark:**
-
-| Metric | Improvement vs Baseline |
-|--------|-------------------------|
-| **Answer Accuracy (Exact Match)** | **+16%** |
-| **Answer Quality (F1 Score)** | **+10%** |
-
-These improvements stem from **intelligent retrieval noise reduction**, not just throwing more compute at the problem.
-
-📈 [View detailed evaluation results](docs/evaluations.md)
-
----
 
 ## Quick Start
 
