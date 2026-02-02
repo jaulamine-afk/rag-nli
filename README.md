@@ -293,16 +293,3 @@ This project builds on recent advances in RAG system reliability:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-**Areas for contribution:**
-- Additional evaluation datasets
-- Domain-specific NLI model fine-tuning
-- Alternative sub-claim decomposition strategies
-- Performance optimization
-
----
-
