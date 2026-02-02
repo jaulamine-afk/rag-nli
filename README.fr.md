@@ -13,7 +13,7 @@ Système de génération augmentée par récupération (RAG) production-ready qu
 
 ---
 
-## Pourquoi C'est Important
+## Impact
 
 Les chatbots et systèmes de Q&A standards souffrent souvent de problèmes critiques :
 
@@ -34,102 +34,7 @@ Les chatbots et systèmes de Q&A standards souffrent souvent de problèmes criti
 - Réduction des coûts opérationnels grâce à moins de réponses incorrectes
 
 ---
-
-## Démonstration Rapide
-
-**Problème :** Les systèmes RAG standards hallucinent lorsque les documents contiennent des informations trompeuses.
-
-**Question :** *"Quel album d'Usher est devenu disque de diamant ?"*
-
-| Système | Réponse | Statut |
-|---------|---------|--------|
-| **RAG Baseline** | "L'album de Rihanna..." | ❌ Incorrect (confus par le bruit) |
-| **RAG Intelligent** | "Confessions" | ✅ Correct (bruit filtré) |
-
-**Comment ?** Le système valide que chaque document récupéré répond effectivement à la question, filtrant le bruit comme le document sur Rihanna lors d'une question sur Usher.
-
----
-
-## Métriques de Performance
-
-**Évaluation sur le benchmark de référence HotpotQA :**
-
-| Métrique | Amélioration vs Baseline |
-|----------|--------------------------|
-| **Précision des Réponses (Exact Match)** | **+16%** |
-| **Qualité des Réponses (Score F1)** | **+10%** |
-
-Ces améliorations proviennent de la **réduction intelligente du bruit de récupération**, pas simplement de plus de puissance de calcul.
-
-📈 [Voir les résultats d'évaluation détaillés](docs/evaluations.md)
-
----
-
-## Démarrage Rapide
-
-### 1. Installer les dépendances
-
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Lancer les expériences
-
-```bash
-python -m scripts.run_experiments
-```
-
-Cela exécutera tous les pipelines sur un sous-ensemble de HotpotQA et affichera les métriques d'évaluation.
-
-### 3. Lancer l'API
-
-Le projet expose un service FastAPI pour la réponse aux questions.
-
-```bash
-python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
-```
-
-## Configuration de la Clé API (Gemini)
-
-Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
-
-1. Générez une clé API ici :
-   [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
-
-2. Créez un fichier nommé `.env` à la racine du projet.
-
-3. Ajoutez votre clé dans le fichier `.env` :
-   ```env
-   GOOGLE_API_KEY=votre_cle_api_ici
-   ```
-
----
-
-## Applications Concrètes
-
-### Support Client
-**Problème :** Les agents donnent des réponses incohérentes à partir de bases de connaissances bruitées  
-**Solution :** Filtrage des articles non pertinents → réponses plus rapides et précises  
-**Impact :** Réduction du temps de résolution des tickets, amélioration des scores de satisfaction client
-
-### Juridique & Conformité
-**Problème :** La révision de documents nécessite de valider des affirmations contre plusieurs sources  
-**Solution :** Validation multi-sources avec vérification d'implication  
-**Impact :** Réduction du risque de responsabilité, analyse de contrats plus rapide
-
-### Documentation Technique
-**Problème :** Les questions "comment faire" complexes nécessitent des informations de plusieurs documents  
-**Solution :** La décomposition en sous-affirmations gère les questions multi-étapes  
-**Impact :** Meilleure expérience développeur, réduction de la charge du support
-
-### Information Médicale
-**Problème :** Les conseils médicaux nécessitent une haute précision et une vérification des sources  
-**Solution :** Validation indépendante de chaque information  
-**Impact :** Fourniture d'informations médicales plus sûres et fiables
-
----
-
-## Comment Ça Marche
+## Fonctionnement
 
 ### Vue d'Ensemble Simple
 
@@ -148,7 +53,7 @@ Le système utilise une approche de filtrage intelligent en trois étapes :
 | **RAG + NLI** | Ajoute un filtrage intelligent via inférence en langage naturel | Q&A général avec réduction du bruit |
 | **RAG + NLI + Sous-Affirmations** | Décompose les questions complexes en parties plus simples | Questions multi-parties, comparatives |
 
-### Architecture Avancée
+### Architecture 
 
 <p align="center">
   <img src="docs/images/Graph_rag_nli_sub.png" alt="Architecture RAG avec NLI" width="600">
@@ -162,6 +67,20 @@ Le système utilise une approche de filtrage intelligent en trois étapes :
 
 ---
 
+## Métriques
+
+**Évaluation sur le benchmark de référence HotpotQA :**
+
+| Métrique | Amélioration vs Baseline |
+|----------|--------------------------|
+| **Précision des Réponses (Exact Match)** | **+16%** |
+| **Qualité des Réponses (Score F1)** | **+10%** |
+
+Ces améliorations proviennent de la **réduction intelligente du bruit de récupération**, pas simplement de plus de puissance de calcul.
+
+📈 [Voir les résultats d'évaluation détaillés](docs/evaluations.md)
+
+---
 ## Agent d'Analyse
 
 Agent de débogage intégré propulsé par Gemini qui explique les décisions du pipeline en langage naturel.
@@ -188,6 +107,45 @@ L'agent explique que le module NLI a filtré avec succès le passage "distracteu
 
 ---
 
+## Démarrage Rapide
+
+### 1. Installer les dépendances
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Lancer les expériences
+
+```bash
+python -m scripts.run_experiments
+```
+
+Cela exécutera tous les pipelines sur un sous-ensemble de HotpotQA et affichera les métriques d'évaluation.
+
+### 3. Lancer l'API
+
+Le projet expose un service FastAPI qui donne accès à un agent d'analyse.
+
+```bash
+python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
+```
+
+## Configuration de la Clé API (Gemini)
+
+Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
+
+1. Générez une clé API ici :
+   [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+
+2. Créez un fichier nommé `.env` à la racine du projet.
+
+3. Ajoutez votre clé dans le fichier `.env` :
+   ```env
+   GOOGLE_API_KEY=votre_cle_api_ici
+   ```
+
+---
 ## Déploiement Docker
 
 Déploiement conteneurisé prêt pour la production :
@@ -210,6 +168,16 @@ curl http://localhost:8001/health
 
 ---
 
+## Applications Concrètes
+
+| Domaine |
+|---------|
+| **Support Client** |
+| **Juridique & Conformité** |
+| **Documentation Technique** |
+| **Information Médicale** |
+
+
 ## Structure du Projet
 
 ```
@@ -219,39 +187,19 @@ rag-nli/
 ├── nli/                 # Modèle NLI et logique de filtrage
 ├── pipelines/           # Implémentations des pipelines
 │   ├── baseline.py      # RAG standard
-│   ├── nli.py          # RAG + filtrage NLI
-│   └── subclaim.py     # RAG + NLI + Sous-affirmations
+│   ├── nli.py           # RAG + filtrage NLI
+│   └── subclaim.py      # RAG + NLI + Sous-affirmations
 ├── evaluation/          # Métriques et lanceurs d'expériences
 ├── agents/              # Agent d'analyse pour le débogage
 ├── api/                 # Service FastAPI
 ├── scripts/             # Scripts d'exécution d'expériences
-├── data/               # Stockage des datasets
-├── docs/               # Documentation détaillée
-├── Dockerfile          # Configuration du conteneur
+├── data/                # Stockage des datasets
+├── docs/                # Documentation détaillée
+├── Dockerfile           # Configuration du conteneur
 └── README.md
 ```
 
----
-
-## Technologies Utilisées
-
-**Technologies Principales :**
-- **Python 3.10+** - Langage de programmation principal
-- **FastAPI** - Framework API de production
-- **Docker** - Conteneurisation
-
-**Stack IA/ML :**
-- **Hugging Face Transformers** - Modèles NLI et génération de texte
-- **FAISS** - Recherche rapide de similarité vectorielle
-- **LangChain / LangGraph** - Orchestration de pipelines
-
-**Déploiement :**
-- **AWS EC2** - Déploiement cloud testé
-- **Google Gemini** - Agent d'analyse
-
----
-
-## Limitations Actuelles & Feuille de Route
+## Limitations & Améliorations
 
 **Limitations actuelles :**
 - La décomposition en sous-affirmations utilise des heuristiques basées sur des règles (peut être améliorée avec décomposition apprise)
@@ -270,20 +218,34 @@ Ces limitations sont reconnues pour souligner le réalisme et guider le dévelop
 
 ---
 
-## Contexte Recherche
+## Technologies 
 
-Ce projet s'appuie sur les avancées récentes en fiabilité des systèmes RAG :
+**Technologies Principales :**
+- **Python 3.10+** - Langage de programmation principal
+- **FastAPI** - Framework API de production
+- **Docker** - Conteneurisation
 
-**Inspirations clés :**
+**Stack IA/ML :**
+- **Hugging Face Transformers** - Modèles NLI et génération de texte
+- **FAISS** - Recherche rapide de similarité vectorielle
+- **LangChain / LangGraph** - Orchestration de pipelines
 
-[1] Lu Dai, Hao Liu, Hui Xiong. *"Improve Dense Passage Retrieval with Entailment Tuning."* HKUST, 2024.
+**Déploiement :**
+- **AWS EC2** - Déploiement cloud testé
+- **Google Gemini** - Agent d'analyse
 
-[2] Ori Yoran, et al. *"Making Retrieval-Augmented Language Models Robust to Irrelevant Context."* ICLR, 2024.
+---
 
-[3] Akari Asai, et al. *"Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection."* ICLR, 2024.
+## Références
 
-[4] Shahul Es, et al. *"RAGAS: Automated Evaluation of Retrieval Augmented Generation."* EACL, 2024.
+[1] Lu Dai, Hao Liu, Hui Xiong. "Improve Dense Passage Retrieval with Entailment Tuning." The Hong Kong University of Science and Technology, 2024.
 
-[5] Nelson F. Liu, et al. *"Lost in the Middle: How Language Models Use Long Contexts."* TACL, 2024.
+[2] Ori Yoran, et al. "Making Retrieval-Augmented Language Models Robust to Irrelevant Context." ICLR, 2024. (Foundational work on noise filtration in RAG).
+
+[3] Akari Asai, et al. "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection." ICLR, 2024. (Context regarding self-correction and claim support).
+
+[4] Shahul Es, et al. "RAGAS: Automated Evaluation of Retrieval Augmented Generation." EACL, 2024. (Framework used for defining Faithfulness metrics via NLI).
+
+[5] Nelson F. Liu, et al. "Lost in the Middle: How Language Models Use Long Contexts." TACL, 2024. (Highlights the necessity of filtering to avoid performance degradation in long contexts).
 
 ---
