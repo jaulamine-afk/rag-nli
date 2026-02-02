@@ -13,7 +13,7 @@ Production-ready Retrieval-Augmented Generation system that filters out irreleva
 
 ---
 
-## 🎯 Why This Matters
+## Why This Matters
 
 Standard chatbots and Q&A systems often suffer from critical issues:
 
@@ -35,7 +35,7 @@ Standard chatbots and Q&A systems often suffer from critical issues:
 
 ---
 
-## 💡 Quick Demo
+## Quick Demo
 
 **Problem:** Standard RAG systems hallucinate when documents contain misleading information.
 
@@ -50,7 +50,7 @@ Standard chatbots and Q&A systems often suffer from critical issues:
 
 ---
 
-## 📊 Performance Metrics
+## Performance Metrics
 
 **Evaluation on industry-standard HotpotQA benchmark:**
 
@@ -65,7 +65,7 @@ These improvements stem from **intelligent retrieval noise reduction**, not just
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install dependencies
 
@@ -105,31 +105,31 @@ Some components (analysis agent) use Gemini 2.5 Flash.
 
 ---
 
-## 🎯 Real-World Applications
+## Real-World Applications
 
-### 📞 Customer Support
+### Customer Support
 **Problem:** Agents give inconsistent answers from noisy knowledge bases  
 **Solution:** Filter irrelevant articles → faster, more accurate responses  
 **Impact:** Reduced ticket resolution time, improved CSAT scores
 
-### ⚖️ Legal & Compliance
+### Legal & Compliance
 **Problem:** Document review requires validating claims against multiple sources  
 **Solution:** Multi-source validation with entailment checking  
 **Impact:** Reduced liability risk, faster contract analysis
 
-### 📚 Technical Documentation
+### Technical Documentation
 **Problem:** Complex "how-to" questions need information from multiple docs  
 **Solution:** Sub-claim decomposition handles multi-step questions  
 **Impact:** Better developer experience, reduced support load
 
-### 🏥 Healthcare Information
+### Healthcare Information
 **Problem:** Medical guidance requires high accuracy and source verification  
 **Solution:** Independent validation of each information piece  
 **Impact:** Safer, more trustworthy medical information delivery
 
 ---
 
-## 🏗️ How It Works
+## How It Works
 
 ### Simple Overview
 
@@ -162,7 +162,7 @@ The system uses a three-stage intelligent filtering approach:
 
 ---
 
-## 🔍 Analysis Agent
+## Analysis Agent
 
 Built-in debugging agent powered by Gemini that explains pipeline decisions in plain language.
 
@@ -188,7 +188,7 @@ The agent explains the NLI module successfully filtered out the "distractor" pas
 
 ---
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 Production-ready containerized deployment:
 
@@ -210,7 +210,7 @@ curl http://localhost:8001/health
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 rag-nli/
@@ -233,7 +233,7 @@ rag-nli/
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 **Core Technologies:**
 - **Python 3.10+** - Main programming language
@@ -251,7 +251,7 @@ rag-nli/
 
 ---
 
-## ⚠️ Current Limitations & Roadmap
+## Current Limitations & Roadmap
 
 **Current limitations:**
 - Sub-claim decomposition uses rule-based heuristics (can be improved with learned decomposition)
@@ -270,7 +270,7 @@ These limitations are acknowledged to emphasize realism and guide future develop
 
 ---
 
-## 📚 Research Background
+## Research Background
 
 This project builds on recent advances in RAG system reliability:
 
@@ -285,11 +285,5 @@ This project builds on recent advances in RAG system reliability:
 [4] Shahul Es, et al. *"RAGAS: Automated Evaluation of Retrieval Augmented Generation."* EACL, 2024.
 
 [5] Nelson F. Liu, et al. *"Lost in the Middle: How Language Models Use Long Contexts."* TACL, 2024.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
