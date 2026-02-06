@@ -53,16 +53,16 @@ Trois pipelines sont implémentés et comparés :
 
 **RAG + NLI :** Filtre les passages récupérés en utilisant NLI pour ne garder que ceux qui impliquent la revendication ([détails](docs/rag_nli.md))
 
-**RAG + NLI + Sous-Revendications :** Décompose les revendications complexes en sous-revendications, valide chacune indépendamment ([détails](docs/rag_nli_subclaim.md))
+**RAG + NLI + Sous-Claims :** Décompose les revendications complexes en sous-revendications, valide chacune indépendamment ([détails](docs/rag_nli_subclaim.md))
 
 ## Architecture du Système
 
-Le diagramme ci-dessous illustre le pipeline principal (**RAG + NLI + Sous-Revendications**). Il détaille comment les requêtes complexes sont décomposées et comment le modèle NLI agit comme un gardien sémantique pour filtrer le bruit avant la génération.
+Le diagramme ci-dessous illustre le pipeline principal (**RAG + NLI + Sous-Claims**). Il détaille comment les requêtes complexes sont décomposées et comment le modèle NLI agit comme un gardien sémantique pour filtrer le bruit avant la génération.
 
 <p align="center">
   <img src="docs/images/Graph_rag_nli_sub.png" alt="Architecture RAG avec NLI" width="600">
   <br>
-  <em>(Figure : Flux de travail de la Décomposition en Sous-Revendications et du Filtrage par Implication NLI)</em>
+  <em>(Figure : Flux de travail de la Décomposition en Sous-Claims et du Filtrage par Implication NLI)</em>
 </p>
 
 ## Évaluation
@@ -81,7 +81,7 @@ Les expériences ont été menées sur HotpotQA (configuration avec distracteurs
 | **Qualité des Réponses (Score F1)** | **+10%** |
 
 **Résultats clés :**  
-Avec notre pipeline le plus avancé (**RAG + NLI + Sous-Revendications**), nous avons observé jusqu'à **+16% d'amélioration en Exact Match** et **+10% en F1** par rapport à une baseline RAG standard, selon le modèle et la configuration Top-K.
+Avec notre pipeline le plus avancé (**RAG + NLI + Sous-Claims**), nous avons observé jusqu'à **+16% d'amélioration en Exact Match** et **+10% en F1** par rapport à une baseline RAG standard, selon le modèle et la configuration Top-K.
 
 
 📈 [Voir les résultats d'évaluation détaillés](docs/evaluations.md)
@@ -108,7 +108,7 @@ L'agent montre comment la baseline échoue (hallucination) tandis que le systèm
   <img src="docs/images/Agent_analysis.png" alt="Analyse Logique Agent" width="600">
 </p>
 
-L'agent explique que le module NLI a filtré avec succès le passage "distracteur" sur Rihanna car il n'impliquait pas la revendication sur l'album "Confessions" d'Usher.
+L'agent explique que le module NLI a filtré avec succès le passage "distracteur" sur Rihanna car il n'impliquait pas la claims sur l'album "Confessions" d'Usher.
 
 *Cet agent aide pendant le développement à analyser les décisions du pipeline, comparer les sorties baseline vs filtrées, et fournit des informations exploitables pour l'ajustement du système.*
 
@@ -193,8 +193,8 @@ Cette configuration a été testée localement et déployée sur une instance AW
 
 ## Limitations
 
-- La décomposition en sous-revendications est basée sur des règles et heuristique
-- Toutes les revendications dans HotpotQA ne sont pas décomposables
+- La décomposition en sous-claims est basée sur des règles et heuristique
+- Toutes les claims dans HotpotQA ne sont pas décomposables
 - Pas de tests de significativité statistique (configuration CPU uniquement)
 - L'accent est mis sur la réduction du bruit de récupération, pas sur la prévention complète des hallucinations
 
