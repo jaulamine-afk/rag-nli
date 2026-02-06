@@ -108,7 +108,7 @@ L'agent montre comment la baseline échoue (hallucination) tandis que le systèm
   <img src="docs/images/Agent_analysis.png" alt="Analyse Logique Agent" width="600">
 </p>
 
-L'agent explique que le module NLI a filtré avec succès le passage "distracteur" sur Rihanna car il n'impliquait pas la claims sur l'album "Confessions" d'Usher.
+L'agent explique que le module NLI a filtré avec succès le passage "distracteur" sur Rihanna car il n'impliquait pas la claim sur l'album "Confessions" d'Usher.
 
 *Cet agent aide pendant le développement à analyser les décisions du pipeline, comparer les sorties baseline vs filtrées, et fournit des informations exploitables pour l'ajustement du système.*
 
