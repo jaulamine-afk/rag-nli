@@ -8,7 +8,7 @@
 [Français](README.fr.md)
 
 
-Production-ready Retrieval-Augmented Generation system that filters out irrelevant information before answer generation, delivering more accurate and trustworthy AI responses.
+Retrieval-Augmented Generation system that filters out irrelevant information before answer generation, delivering more accurate and trustworthy AI responses.
 
 **Use cases:** Customer support, legal document analysis, technical documentation search, compliance verification
 
