@@ -7,7 +7,7 @@
 
 [English](README.md)
 
-Système RAG prêt pour la production qui filtre les informations non pertinentes avant la génération de réponses, offrant des réponses IA plus précises et fiables.
+Système RAG qui filtre les informations non pertinentes avant la génération de réponses, offrant des réponses IA plus précises et fiables.
 
 **Cas d’usage :** Support client, analyse de documents juridiques, recherche dans la documentation technique, vérification de conformité
 
