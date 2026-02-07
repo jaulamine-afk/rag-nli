@@ -1,4 +1,4 @@
-# RAG avec NLI et Décomposition en Sous-Revendications
+# RAG avec NLI et Décomposition en Sous-Claims
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)](https://www.docker.com/)
@@ -9,7 +9,7 @@
 
 Système RAG qui filtre les informations non pertinentes avant la génération de réponses, offrant des réponses IA plus précises et fiables.
 
-**Cas d’usage :** Support client, analyse de documents juridiques, recherche dans la documentation technique, vérification de conformité
+**Cas d'usage :** Support client, analyse de documents juridiques, recherche dans la documentation technique, vérification de conformité
 
 ---
 
@@ -51,9 +51,9 @@ Trois pipelines sont implémentés et comparés :
 
 **Baseline RAG :** Récupération dense (FAISS) + génération basée sur prompts
 
-**RAG + NLI :** Filtre les passages récupérés en utilisant NLI pour ne garder que ceux qui impliquent la revendication ([détails](docs/rag_nli.md))
+**RAG + NLI :** Filtre les passages récupérés en utilisant NLI pour ne garder que ceux qui impliquent la claim ([détails](docs/rag_nli.md))
 
-**RAG + NLI + Sous-Claims :** Décompose les revendications complexes en sous-revendications, valide chacune indépendamment ([détails](docs/rag_nli_subclaim.md))
+**RAG + NLI + Sous-Claims :** Décompose les claims complexes en sous-claims, valide chacune indépendamment ([détails](docs/rag_nli_subclaim.md))
 
 ## Architecture du Système
 
@@ -169,7 +169,7 @@ Certains composants (agent d'analyse) utilisent Gemini 2.5 Flash.
 3. Ajoutez votre clé dans le fichier `.env` :
    ```env
    GOOGLE_API_KEY=votre_clé_api_ici
-   
+   ```
 
 
 ## Optionnel : Déploiement Docker
@@ -217,7 +217,7 @@ Ces limitations sont discutées de manière transparente pour souligner le réal
 
 [2] Ori Yoran, et al. "Making Retrieval-Augmented Language Models Robust to Irrelevant Context." ICLR, 2024. (Travail fondamental sur la filtration du bruit dans RAG).
 
-[3] Akari Asai, et al. "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection." ICLR, 2024. (Contexte concernant l'auto-correction et le support des revendications).
+[3] Akari Asai, et al. "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection." ICLR, 2024. (Contexte concernant l'auto-correction et le support des claims).
 
 [4] Shahul Es, et al. "RAGAS: Automated Evaluation of Retrieval Augmented Generation." EACL, 2024. (Framework utilisé pour définir les métriques de Fidélité via NLI).
 
