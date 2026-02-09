@@ -159,7 +159,7 @@ python -m uvicorn api.main:app --host 127.0.0.1 --port 8001
 
 ## API Key Configuration (Gemini)
 
-Some components (analysis agent) use Gemini 2.5 Flash.
+Some components (analysis agent) use Gemini 2.5 Flash-lite.
 
 1. Generate an API key here:
    [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
